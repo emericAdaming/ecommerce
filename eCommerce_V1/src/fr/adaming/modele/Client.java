@@ -1,9 +1,13 @@
 package fr.adaming.modele;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +21,10 @@ public class Client {
 	private String adresse;
 	private String email;
 	private String tel;
+	
+	@OneToMany(mappedBy="client",cascade=CascadeType.ALL)
+	private List<Commande> list_commande;
+	
 	
 	// Constructeurs
 	
@@ -71,6 +79,15 @@ public class Client {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
+	
+	
+	public List<Commande> getList_commande() {
+		return list_commande;
+	}
+	public void setList_commande(List<Commande> list_commande) {
+		this.list_commande = list_commande;
+	}
+	
 	
 	// toString
 	

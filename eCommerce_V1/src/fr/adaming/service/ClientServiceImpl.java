@@ -7,7 +7,7 @@ import fr.adaming.dao.IClientDao;
 import fr.adaming.modele.Client;
 
 @Stateful
-public class ClientServiceDao implements IClientService{
+public class ClientServiceImpl implements IClientService{
 
 	@EJB
 	private IClientDao clientDao;

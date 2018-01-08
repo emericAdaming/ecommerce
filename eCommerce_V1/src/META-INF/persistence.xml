@@ -7,6 +7,10 @@
 	
 	<!-- Enumeration des classes persistentes -->
 	<class>fr.adaming.modele.Produit</class>
+	<class>fr.adaming.modele.Client</class>
+	<class>fr.adaming.modele.Commande</class>
+	<class>fr.adaming.modele.LigneCommande</class>
+	<class>fr.adaming.modele.Categorie</class>
 	
 	<!-- Assignation des valeurs aux properties de hibernate -->
 	<properties>

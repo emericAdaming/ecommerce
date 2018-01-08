@@ -1,9 +1,15 @@
 package fr.adaming.modele;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +25,13 @@ public class Produit {
 	private int quantite;
 	private boolean selectionne;
 	private byte[] photo;
+	
+	@OneToMany(mappedBy="produit",cascade=CascadeType.ALL)
+	private List<LigneCommande> ligneCommande;
+	@ManyToOne
+	@JoinColumn(name="id_categorie",referencedColumnName="idCategorie")
+	private  Categorie categorie;
+	
 	
 	// Constructeurs
 	
@@ -112,7 +125,19 @@ public class Produit {
 		this.photo = photo;
 	}
 
-	// toString
+	
+	
+
+	public List<LigneCommande> getLigneCommande() {
+		return ligneCommande;
+	}
+
+
+	public void setLigneCommande(List<LigneCommande> ligneCommande) {
+		this.ligneCommande = ligneCommande;
+	}
+
+//************ 	// toString **********************************************************
 
 	@Override
 	public String toString() {

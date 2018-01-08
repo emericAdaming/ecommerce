@@ -13,6 +13,18 @@
 <h:body>
 	<h1 style="color:green;text-align:center"> Ajout Client</h1>
 	
+	<h:form>
+	<h:panelGrid columns="2">
+	
+	Nom:<h:inputText value="#{clientMB.client.nomClient}"/>
+	Adresse:<h:inputText value="#{clientMB.client.adresse}"/>
+	Email:<h:inputText value="#{clientMB.client.email}"/>
+	Tel:<h:inputText value="#{clientMB.client.tel}"/>
+	
+	<p:commandButton value="Ajouter" action="#{clientMB.ajouterClient}" ></p:commandButton>
+	
+	</h:panelGrid>
+	</h:form>
 
 </h:body>
 
