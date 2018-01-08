@@ -1,0 +1,37 @@
+<!DOCTYPE html >
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h ="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<h1 style="color:green;text-align:center"> Ajout Voiture</h1>
+	
+<p:breadCrumb>
+    <p:menuitem value="Accueil" url="accueil.xhtml" />
+    <p:menuitem value="Ajout" url="ajoutVoiture.xhtml" />
+    <p:menuitem value="Modification" url="#" />
+    <p:menuitem value="Recherche" url="#" />
+ 
+</p:breadCrumb>
+
+	<h:form>
+	<h:panelGrid columns="2">
+	
+	Marque:<h:inputText value="#{vMB.voiture.marque}"/>
+	Type:<h:inputText value="#{vMB.voiture.type}"/>
+	N°Sere:<h:inputText value="#{vMB.voiture.numS}"/>
+	
+	<p:commandButton value="Ajouter" action="#{vMB.ajouterVoiture}" ></p:commandButton>
+	
+	</h:panelGrid>
+	</h:form>
+</h:body>
+
+</html>
