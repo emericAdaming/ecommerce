@@ -72,8 +72,6 @@ public class ProduitManagedBean implements Serializable{
 		
 		this.listeProduits=produitService.getProduitsCategorie(this.categorie);
 		
-		
-		
 		return "produits";
 		
 	}

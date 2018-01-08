@@ -11,19 +11,21 @@
 </h:head>
 <h:body>
 
-
+<h:form>
 	<p:dataTable var="cat" value="#{categorieMB.listeCategories}">
 		<p:column headerText="Categories">
 			<h:outputText value="#{cat}" />
 		</p:column>
 		
 		<p:column headerText="Boutton">
-			<p:commandLink value="jgfk"
-				action="#{produitMB.getProduitsCategorie}" />
+			<p:commandButton value="#{cat.nomCategorie}"
+				action="#{produitMB.getProduitsCategorie}">
+				<f:setPropertyActionListener value="#{cat}" target="#{produitMB.categorie}"></f:setPropertyActionListener>
+			</p:commandButton>
 			
 		</p:column>
 	</p:dataTable>
 
-
+</h:form>
 </h:body>
 </html>
