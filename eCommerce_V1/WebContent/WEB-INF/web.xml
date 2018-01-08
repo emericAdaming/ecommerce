@@ -21,6 +21,6 @@
 
   
   <welcome-file-list>
-  	<welcome-file>ajoutClient.xhtml</welcome-file>
+  	<welcome-file>accueil.xhtml</welcome-file>
   </welcome-file-list>
 </web-app>

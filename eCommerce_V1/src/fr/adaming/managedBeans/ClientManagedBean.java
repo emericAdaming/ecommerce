@@ -1,6 +1,8 @@
 package fr.adaming.managedBeans;
 
 
+import java.io.Serializable;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
@@ -10,7 +12,7 @@ import fr.adaming.service.IClientService;
 
 @ManagedBean(name="clientMB")
 @RequestScoped
-public class ClientManagedBean {
+public class ClientManagedBean implements Serializable {
 
 	@EJB
 	private IClientService clientService;
