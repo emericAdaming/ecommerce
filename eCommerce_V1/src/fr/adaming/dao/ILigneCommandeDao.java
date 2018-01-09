@@ -13,8 +13,12 @@ public interface ILigneCommandeDao {
 	
 	public List<LigneCommande> getAllLignes();
 	
-	public LigneCommande isExistLigneCommande(LigneCommande ligne);
+	public LigneCommande isExistLigneCommande(LigneCommande ligne) throws Exception;
 	
 	public LigneCommande updateLigneCommande(LigneCommande ligne);
+	
+	public void supprimerLigneCommande(LigneCommande ligne);
+	
+	public LigneCommande quantiteLigneCommande(LigneCommande ligne);
 	
 }

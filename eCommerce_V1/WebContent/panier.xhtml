@@ -11,11 +11,12 @@
 </h:head>
 <h:body>
 
-	<ui:insert name="pageHeader">
+<ui:insert name="pageHeader">
 		<ui:include src="/template/header.xhtml"></ui:include>
 	</ui:insert>
-	
+
 	<h1>Panier</h1>
+
 
 	<p:dataTable var="ligne" value="#{sessionScope.listeLignes}">
 		<p:column headerText="ID">
@@ -26,7 +27,7 @@
 			<h:outputText value="#{ligne.prix}" />
 		</p:column>
 
-		<p:column headerText="QuantitÃ©">
+		<p:column headerText="Quantité">
 			<h:outputText value="#{ligne.quantite}" />
 		</p:column>
 
@@ -34,7 +35,30 @@
 			<h:outputText value="#{ligne.produit}" />
 		</p:column>
 
+		<p:column headerText="Supprimer">
+			<h:form>
+				<p:commandButton value="Supprimer"
+					action="#{ligneCommandeMB.supprimerLigneCommande}" update="@all">
+					<f:setPropertyActionListener value="#{ligne}"
+						target="#{ligneCommandeMB.ligne}"></f:setPropertyActionListener>
+				</p:commandButton>
+			</h:form>
+		</p:column>
+		
+		<p:column headerText="Modifier Qté">
+			<h:form>
+			<h:inputText value="#{ligneCommandeMB.ligne.quantite}"
+					placeholder="Qté" />
+				<p:commandButton value="Modifier"
+					action="#{ligneCommandeMB.quantiteLigneCommande}" update="@all">
+					<f:setPropertyActionListener value="#{ligne.id}"
+						target="#{ligneCommandeMB.ligne.id}"></f:setPropertyActionListener>
+				</p:commandButton>
+			</h:form>
+		</p:column>
+
 	</p:dataTable>
+
 
 </h:body>
 

@@ -13,7 +13,7 @@
 
 	<h1>Liste des produits</h1>
 
-	<h:form>
+	
 		<p:dataTable var="pro" value="#{sessionScope.listeProduits}">
 			<p:column headerText="ID">
 				<h:outputText value="#{pro.idProduit}" />
@@ -44,7 +44,7 @@
 			</p:column>
 
 			<p:column>
-
+			<h:form>
 				<h:inputText value="#{ligneCommandeMB.ligne.quantite}"
 					placeholder="Qté" />
 
@@ -52,13 +52,12 @@
 					action="#{ligneCommandeMB.ajouterLigneCommande}" update="@all">
 					<f:setPropertyActionListener value="#{pro}" target="#{ligneCommandeMB.ligne.produit}"></f:setPropertyActionListener>
 				</p:commandButton>
-
+			</h:form>
 			</p:column>
 
 		</p:dataTable>
-	</h:form>
+	
 
 </h:body>
 
 </html>
-

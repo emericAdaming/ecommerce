@@ -27,7 +27,7 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService{
 	}
 
 	@Override
-	public LigneCommande isExistLigneCommande(LigneCommande ligne) {
+	public LigneCommande isExistLigneCommande(LigneCommande ligne) throws Exception {
 		// TODO Auto-generated method stub
 		return ligneServiceDao.isExistLigneCommande(ligne);
 	}
@@ -36,6 +36,18 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService{
 	public LigneCommande updateLigneCommande(LigneCommande ligne) {
 		// TODO Auto-generated method stub
 		return ligneServiceDao.updateLigneCommande(ligne);
+	}
+
+	@Override
+	public void supprimerLigneCommande(LigneCommande ligne) {
+		// TODO Auto-generated method stub
+		ligneServiceDao.supprimerLigneCommande(ligne);
+	}
+
+	@Override
+	public LigneCommande quantiteLigneCommande(LigneCommande ligne) {
+		// TODO Auto-generated method stub
+		return ligneServiceDao.quantiteLigneCommande(ligne);
 	}
 
 	
