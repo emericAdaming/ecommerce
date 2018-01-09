@@ -5,14 +5,16 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 import fr.adaming.modele.Categorie;
 import fr.adaming.modele.Produit;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name="produitMB")
-@RequestScoped
+@SessionScoped
 public class ProduitManagedBean implements Serializable{
 
 	@EJB
@@ -24,6 +26,8 @@ public class ProduitManagedBean implements Serializable{
 	
 	private Categorie categorie;
 
+	
+	
 	// Constructeur
 	
 	public ProduitManagedBean() {
@@ -72,6 +76,8 @@ public class ProduitManagedBean implements Serializable{
 		
 		this.listeProduits=produitService.getProduitsCategorie(this.categorie);
 		
+		// On ajoute la liste de produits dans la session
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeProduits", listeProduits);
 		return "produits";
 		
 	}
@@ -80,7 +86,7 @@ public String getProduitsSelect(){
 		
 		this.listeProduits=produitService.getProduitsSelect();
 		
-		return null;
+		return "panier";
 		
 	}
 	
