@@ -11,6 +11,10 @@
 </h:head>
 <h:body>
 
+	<ui:insert name="pageHeader">
+		<ui:include src="/template/header.xhtml"></ui:include>
+	</ui:insert>
+	
 	<h:form>
 		<p:commandButton value="Mon Panier"
 			action="#{ligneCommandeMB.getAllLignes}">
@@ -20,8 +24,13 @@
 	<h:form>
 		<p:dataTable var="cat" value="#{categorieMB.listeCategories}">
 			<p:column headerText="Categories">
-				<h:outputText value="#{cat}" />
+				<h:outputText value="#{cat.nomCategorie}" />
 			</p:column>
+			
+		<p:column headerText="Images">
+		 	<h:graphicImage  value="#{cat.image}"/>
+		</p:column>
+			
 
 			<p:column headerText="Boutton">
 				<p:commandButton value="#{cat.nomCategorie}"
