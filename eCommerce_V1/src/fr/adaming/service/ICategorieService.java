@@ -11,5 +11,9 @@ import fr.adaming.modele.Categorie;
 public interface ICategorieService {
 	
 	public List<Categorie> getAllCategories();
+	
+	public Categorie addCategorie(Categorie c);
+	
+	public byte[] getCategorieById(int id_categorie);
 
 }

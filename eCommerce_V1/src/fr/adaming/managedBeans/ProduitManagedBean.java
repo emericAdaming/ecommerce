@@ -6,13 +6,19 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
+import org.apache.commons.codec.binary.Base64;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 import fr.adaming.modele.Categorie;
 import fr.adaming.modele.Produit;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name="produitMB")
-@RequestScoped
+@SessionScoped
 public class ProduitManagedBean implements Serializable{
 
 	@EJB
@@ -23,6 +29,8 @@ public class ProduitManagedBean implements Serializable{
 	private List<Produit> listeProduits;
 	
 	private Categorie categorie;
+	
+	private String image;
 
 	// Constructeur
 	
@@ -64,26 +72,55 @@ public class ProduitManagedBean implements Serializable{
 		this.categorie = categorie;
 	}
 	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	
 	// Méthodes métier
 	
+
+
 	public String getProduitsCategorie(){
 		
 		System.out.println("Categorie du produit: "+this.categorie);
-		
+		System.out.println(" %%%%%%%%%%%%%%% Categorie du produit: "+this.categorie.getIdCategorie()+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		this.listeProduits=produitService.getProduitsCategorie(this.categorie);
+			
 		
-		
-		
+		// On ajoute la liste de produits dans la session
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeProduits", listeProduits);
 		return "produits";
 		
 	}
 	
-public String getProduitsSelect(){
-		
+       public String getProduitsSelect(){
+		System.out.println("Acces panier");
 		this.listeProduits=produitService.getProduitsSelect();
+		listeProduits.forEach(System.out::println);
 		
-		return null;
+		return "panier";
 		
+	}
+       
+   	
+   	public void upload(FileUploadEvent event) {
+   	    UploadedFile uploadedFile = event.getFile();	
+   	    byte[] contents=uploadedFile.getContents();
+   	    produit.setPhoto(contents); 
+   	    image="data:image/png;base64,"+Base64.encodeBase64String(contents);
+   	}
+   	
+	public String ajouterProduit(){
+		System.out.println("Enregistrement Produit");
+		/*categorieService.addCategorie(categorie);
+		categorie=null;
+		image=null;*/
+		return "accueil";
 	}
 	
 }

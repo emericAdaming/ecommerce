@@ -21,4 +21,14 @@ public class CategorieServiceImpl implements ICategorieService{
 		return categorieDao.getAllCategories();
 	}
 
+	public Categorie addCategorie(Categorie c){
+		
+		return categorieDao.addCategorie(c);
+	}
+
+	@Override
+	public byte[] getCategorieById(int id_categorie) {
+
+		return categorieDao.getCategorieById(id_categorie);
+	}
 }

@@ -11,26 +11,30 @@
 </h:head>
 
 <h:body>
-	<h1 style="color:green;text-align:center"> Ajout Voiture</h1>
-	
-<p:breadCrumb>
-    <p:menuitem value="Accueil" url="accueil.xhtml" />
-    <p:menuitem value="Ajout" url="ajoutVoiture.xhtml" />
-    <p:menuitem value="Modification" url="#" />
-    <p:menuitem value="Recherche" url="#" />
- 
-</p:breadCrumb>
 
+	<ui:insert name="pageHeader">
+		<ui:include src="/template/header.xhtml"></ui:include>
+	</ui:insert>
+
+	<h1 style="color:green;text-align:center"> Ajouter Produit</h1>
+	
 	<h:form>
 	<h:panelGrid columns="2">
 	
-	Marque:<h:inputText value="#{vMB.voiture.marque}"/>
-	Type:<h:inputText value="#{vMB.voiture.type}"/>
-	N°Sere:<h:inputText value="#{vMB.voiture.numS}"/>
-	
-	<p:commandButton value="Ajouter" action="#{vMB.ajouterVoiture}" ></p:commandButton>
+	Description:<h:inputText value="#{produitMB.produit.description}"/>
+	Designation:<h:inputText value="#{produitMB.produit.designation}"/>
+	Prix:<h:inputText value="#{produitMB.produit.prix}"/>
+	 <p:outputLabel for="ca" value="Categorie " />
+        <p:selectOneMenu id="ca" value="#{categorieMB.categorie.nomCategorie}">
+            <f:selectItem itemLabel="Select One" itemValue="" />
+            <f:selectItems value="#{categorieMB.categorie_designation}" />
+        </p:selectOneMenu>
+      
+     Photo:<p:fileUpload mode="advanced" auto="true" fileUploadListener="#{produitMB.upload}" update="idImgProduit" />    
+     <h:graphicImage id="idImgProduit"  value="#{produitMB.image}"/>   
 	
 	</h:panelGrid>
+	<p:commandButton value="Ajouter" action="#{produitMB.ajouterProduit}" ></p:commandButton>
 	</h:form>
 </h:body>
 

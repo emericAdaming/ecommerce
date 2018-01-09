@@ -36,8 +36,14 @@ public class ProduitDaoImpl implements IProduitDao {
 		query.setParameter("pCategorie", c);
 
 		// Envoie de la requete et récupération de la liste
+		List<Produit> p_list=query.getResultList();		
+		for(Produit element:p_list){
+			System.out.println("Element trouve :"+element);
+		}
+		if(p_list==null)
+			System.out.println("Aucun produit trouve");
 
-		return query.getResultList();
+		return p_list;
 	}
 
 	@Override
@@ -49,7 +55,7 @@ public class ProduitDaoImpl implements IProduitDao {
 		Query query = em.createQuery(req);
 
 		// Envoie de la requete et récupération de la liste
-
+		
 		return query.getResultList();
 	}
 

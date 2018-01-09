@@ -12,18 +12,31 @@
 <h:body>
 
 
-	<p:dataTable var="cat" value="#{categorieMB.listeCategories}">
-		<p:column headerText="Categories">
-			<h:outputText value="#{cat}" />
-		</p:column>
-		
-		<p:column headerText="Boutton">
-			<p:commandLink value="jgfk"
-				action="#{produitMB.getProduitsCategorie}" />
+	<ui:insert name="pageHeader">
+		<ui:include src="/template/header.xhtml"></ui:include>
+	</ui:insert>
+
+
+	<h:form>
+		<p:dataTable var="cat" value="#{categorieMB.listeCategories}">
+			<p:column headerText="Categories">
+				<h:outputText value="#{cat.description}" />
+			</p:column>
 			
-		</p:column>
-	</p:dataTable>
+			<p:column headerText="Image">
+				<h:graphicImage  value="#{cat.image}"/>
+			</p:column>
 
+			<p:column headerText="Produits">
+				<p:commandButton value="Voir produits"
+					action="#{produitMB.getProduitsCategorie}">
+					<f:setPropertyActionListener value="#{cat}"
+						target="#{produitMB.categorie}"></f:setPropertyActionListener>
+				</p:commandButton>
 
+			</p:column>
+		</p:dataTable>
+
+	</h:form>
 </h:body>
 </html>

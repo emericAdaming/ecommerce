@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Panier</title>
+</h:head>
+<h:body>
+
+	<ui:insert name="pageHeader">
+		<ui:include src="/template/header.xhtml"></ui:include>
+	</ui:insert>
+	
+	<h1>Panier</h1>
+
+	<p:dataTable var="ligne" value="#{sessionScope.listeLignes}">
+		<p:column headerText="ID">
+			<h:outputText value="#{ligne.id}" />
+		</p:column>
+
+		<p:column headerText="Prix">
+			<h:outputText value="#{ligne.prix}" />
+		</p:column>
+
+		<p:column headerText="Quantité">
+			<h:outputText value="#{ligne.quantite}" />
+		</p:column>
+
+		<p:column headerText="Produit">
+			<h:outputText value="#{ligne.produit}" />
+		</p:column>
+
+	</p:dataTable>
+
+</h:body>
+
+</html>

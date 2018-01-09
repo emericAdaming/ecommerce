@@ -38,6 +38,35 @@ public class CategorieDaoImpl implements ICategorieDao {
 		return liste;
 	}
 	
-	
+	public Categorie addCategorie(Categorie c){
+			
+		em.persist(c);
+		return c;
+	}
+
+
+	@Override
+	public byte[] getCategorieById(int id_categorie) {
+		System.out.println("********** Recuperer categorie by id ****************");
+		Categorie c;
+		try{
+		byte[] p;
+		// Ecrire la requete 
+		String req="SELECT c FROM Categorie c where c.idCategorie=:pId";			
+		Query query=em.createQuery(req);
+		query.setParameter("pId", (long)id_categorie);
+				
+		// Envoyer la requete et recuperer la liste
+		 c=(Categorie) query.getSingleResult();		 
+		 return c.getPhoto();
+		 
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+		}
+		
+		System.out.println("********** Retourne byte array ****************");
+		return null;
+	}
 
 }

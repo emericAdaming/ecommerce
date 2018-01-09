@@ -1,0 +1,59 @@
+<!DOCTYPE html >
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Barre Menu</title>
+</h:head>
+
+<h:body>
+
+	<ui:composition>
+	
+		<h:form>  
+    <p:growl id="messages"/>
+ 
+    <p:menubar>
+
+
+            <p:menuitem value="Accueil" url="accueil.xhtml"  />
+ 
+    
+        <p:submenu label="Categorie" >
+            <p:submenu label="Ajouter" >
+                <p:menuitem value="NEW categorie" url="ajoutCategorie.xhtml" />
+                <p:menuitem value="......" url="#" />
+            </p:submenu>
+            <p:menuitem value="Supprimer" url="supprimerCategorie.xhtml" />
+            <p:menuitem value="Modifier" url="modifierCategorie.xhtml" />
+            <p:separator />
+            <p:menuitem value="Rechercher" url="rechercherCategorie.xhtml" />
+        </p:submenu>
+ 
+        <p:submenu label="Produits" >
+            <p:menuitem value="Lister Produits" action="#"  />
+             <p:menuitem value="Ajouter" url="ajoutProduit.xhtml" />
+            <p:menuitem value="Modifier" url="#" />
+            <p:menuitem value="Supprimer"  url="supprimerProduit.xhtml" />
+            <p:menuitem value="Recherche" url="rechercherProduit.xhtml" />
+        </p:submenu>
+ 
+
+         <p:menuitem value="Panier" url="panier.xhtml" action="#{produitMB.getProduitsSelect}" />
+   
+ 
+
+ 
+ 		 <p:menuitem value="connection admin" url="login.xhtml" />
+ 
+    </p:menubar>
+</h:form>
+	</ui:composition>
+
+</h:body>
+
+</html>
