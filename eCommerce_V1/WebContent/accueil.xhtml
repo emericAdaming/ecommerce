@@ -11,24 +11,20 @@
 </h:head>
 <h:body>
 
-
-	<ui:insert name="pageHeader">
-		<ui:include src="/template/header.xhtml"></ui:include>
-	</ui:insert>
-
+	<h:form>
+		<p:commandButton value="Mon Panier"
+			action="#{produitMB.getProduitsSelect}">
+		</p:commandButton>
+	</h:form>
 
 	<h:form>
 		<p:dataTable var="cat" value="#{categorieMB.listeCategories}">
 			<p:column headerText="Categories">
-				<h:outputText value="#{cat.description}" />
-			</p:column>
-			
-			<p:column headerText="Image">
-				<h:graphicImage  value="#{cat.image}"/>
+				<h:outputText value="#{cat}" />
 			</p:column>
 
-			<p:column headerText="Produits">
-				<p:commandButton value="Voir produits"
+			<p:column headerText="Boutton">
+				<p:commandButton value="#{cat.nomCategorie}"
 					action="#{produitMB.getProduitsCategorie}">
 					<f:setPropertyActionListener value="#{cat}"
 						target="#{produitMB.categorie}"></f:setPropertyActionListener>
