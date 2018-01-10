@@ -3,11 +3,13 @@ package fr.adaming.managedBeans;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
 import org.primefaces.event.FileUploadEvent;
@@ -19,31 +21,37 @@ import fr.adaming.modele.Categorie;
 import fr.adaming.modele.Produit;
 import fr.adaming.service.IProduitService;
 
-@ManagedBean(name="produitMB")
+@ManagedBean(name = "produitMB")
 @SessionScoped
-public class ProduitManagedBean implements Serializable{
+public class ProduitManagedBean implements Serializable {
 
 	@EJB
 	private IProduitService produitService;
-	
-	private Produit produit;
-	
-	private List<Produit> listeProduits;
-	
-	private Categorie categorie;
-	
-	private String image;
 
+	private Produit produit;
+
+	private List<Produit> listeProduits;
+
+	private Categorie categorie;
+
+	private String image;
 	
-	
+	private HttpSession maSession;
+
 	// Constructeur
-	
+
 	public ProduitManagedBean() {
-		this.produit=new Produit();
+		this.produit = new Produit();
 	}
 
-	// Getters & Setters
+	@PostConstruct
+	public void init() {
+		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+	}
 	
+	// Getters & Setters
+
 	public IProduitService getProduitService() {
 		return produitService;
 	}
@@ -75,7 +83,7 @@ public class ProduitManagedBean implements Serializable{
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
-	
+
 	public String getImage() {
 		return image;
 	}
@@ -83,48 +91,51 @@ public class ProduitManagedBean implements Serializable{
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
-	
+
 	// Méthodes métier
-	
 
+	public String getProduitsCategorie() {
 
-	public String getProduitsCategorie(){
-		
-		System.out.println("Categorie du produit: "+this.categorie);
-		System.out.println(" %%%%%%%%%%%%%%% Categorie du produit: "+this.categorie.getIdCategorie()+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		this.listeProduits=produitService.getProduitsCategorie(this.categorie);
-			
-		
+		System.out.println("Categorie du produit: " + this.categorie);
+		System.out.println(" %%%%%%%%%%%%%%% Categorie du produit: " + this.categorie.getIdCategorie()
+				+ "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		this.listeProduits = produitService.getProduitsCategorie(this.categorie);
+
 		// On ajoute la liste de produits dans la session
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeProduits", listeProduits);
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeProduits", listeProduits);
 		return "produits";
-		
+
 	}
-	
-       public String getProduitsSelect(){
+
+	public String getProduitsSelect() {
 		System.out.println("Acces panier");
-		this.listeProduits=produitService.getProduitsSelect();
+		this.listeProduits = produitService.getProduitsSelect();
 		listeProduits.forEach(System.out::println);
-		
+
 		return "panier";
-		
+
 	}
-       
-   	
-   	public void upload(FileUploadEvent event) {
-   	    UploadedFile uploadedFile = event.getFile();	
-   	    byte[] contents=uploadedFile.getContents();
-   	    produit.setPhoto(contents); 
-   	    image="data:image/png;base64,"+Base64.encodeBase64String(contents);
-   	}
-   	
-	public String ajouterProduit(){
+
+	public void upload(FileUploadEvent event) {
+		UploadedFile uploadedFile = event.getFile();
+		byte[] contents = uploadedFile.getContents();
+		produit.setPhoto(contents);
+		image = "data:image/png;base64," + Base64.encodeBase64String(contents);
+	}
+
+	public String ajouterProduit() {
 		System.out.println("Enregistrement Produit");
-		/*categorieService.addCategorie(categorie);
-		categorie=null;
-		image=null;*/
+		produitService.addProduit(produit);
+
+		// Récupérer la nouvelle liste à partir de la BDD
+		this.listeProduits = produitService.getProduitsCategorie(this.categorie);
+
+		// Metre à jour la liste dans la session
+		maSession.setAttribute("listeProduits", this.listeProduits);
+		
+		produit = null;
+		image = null;
 		return "accueil";
 	}
-	
+
 }

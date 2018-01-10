@@ -27,5 +27,11 @@ public class ProduitServiceImpl implements IProduitService{
 		// TODO Auto-generated method stub
 		return produitDao.getProduitsSelect();
 	}
+
+	@Override
+	public Produit addProduit(Produit p) {
+		// TODO Auto-generated method stub
+		return produitDao.addProduit(p);
+	}
 	
 }

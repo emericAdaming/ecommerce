@@ -24,6 +24,7 @@
 	Description:<h:inputText value="#{produitMB.produit.description}"/>
 	Designation:<h:inputText value="#{produitMB.produit.designation}"/>
 	Prix:<h:inputText value="#{produitMB.produit.prix}"/>
+	Quantité:<h:inputText value="#{produitMB.produit.quantite}"/>
 	 <p:outputLabel for="ca" value="Categorie " />
         <p:selectOneMenu id="ca" value="#{categorieMB.categorie.nomCategorie}">
             <f:selectItem itemLabel="Select One" itemValue="" />
@@ -34,7 +35,9 @@
      <h:graphicImage id="idImgProduit"  value="#{produitMB.image}"/>   
 	
 	</h:panelGrid>
-	<p:commandButton value="Ajouter" action="#{produitMB.ajouterProduit}" ></p:commandButton>
+	<p:commandButton value="Ajouter" action="#{produitMB.ajouterProduit}" >
+	<f:setPropertyActionListener value="#{categorieMB.categorie.nomCategorie}" target="#{produitMB.produit.categorie}"></f:setPropertyActionListener>
+	</p:commandButton>
 	</h:form>
 </h:body>
 

@@ -14,4 +14,6 @@ public interface IProduitService {
 	
 	public List<Produit> getProduitsSelect();
 	
+	public Produit addProduit(Produit p);
+	
 }

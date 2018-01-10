@@ -59,4 +59,11 @@ public class ProduitDaoImpl implements IProduitDao {
 		return query.getResultList();
 	}
 
+	@Override
+	public Produit addProduit(Produit p) {
+		// Ajouter le produit à la BDD
+		em.persist(p);
+		return p;
+	}
+
 }
