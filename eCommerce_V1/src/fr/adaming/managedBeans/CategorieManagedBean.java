@@ -38,6 +38,7 @@ public class CategorieManagedBean implements Serializable {
 	
 	private Categorie categorie;
 	private List<String> categorie_designation;
+	private String recherche;
 	
 	private UploadedFile file;
 
@@ -103,9 +104,20 @@ public class CategorieManagedBean implements Serializable {
 	public void setCategorie_designation(List<String> categorie_designation) {
 		this.categorie_designation = categorie_designation;
 	}
+	
+	
+	public String getRecherche() {
+		return recherche;
+	}
+
+	public void setRecherche(String recherche) {
+		this.recherche = recherche;
+	}
 
 	//***************************************************************************************************************
 	
+
+
 	@PostConstruct
 	public void init(){
 		getAllCategories();
@@ -166,6 +178,30 @@ public class CategorieManagedBean implements Serializable {
 				categorie_designation.add(element.getNomCategorie());
 		}
 
+	}
+	
+	public void rechercheCategorie(){
+		System.out.println("Recherche ajax");
+		List<Categorie> list_filtre=new ArrayList<Categorie>();
+		List<Categorie> list_filtre_image=new ArrayList<Categorie>();
+		listeCategories=categorieService.getAllCategories();
+
+		//on garde seulement les categorie filtrees
+		for(Categorie element:listeCategories){
+            if(element.getDescription().startsWith(recherche)) {
+            	list_filtre.add(element);
+            }
+        }
+		//Rempli les images a afficher
+		for(Categorie element:list_filtre){
+			if(element.getPhoto() == null){
+				element.setImage(null);
+			}else{
+				element.setImage("data:image/png;base64,"+Base64.encodeBase64String(element.getPhoto()));
+			}
+			list_filtre_image.add(element);
+		}
+		listeCategories=list_filtre_image;
 	}
 	
 }

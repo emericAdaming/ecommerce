@@ -1,0 +1,18 @@
+
+body{
+	/*background-image: url("#{ resource [ 'images/fond_noel_6.jpg' ]}");
+	background-image: url("#{ resource['images/neige_gif_1.gif']}");*/
+	/*background: url("#{ resource['images/fond_p.jpg']}") fixed;
+	background-repeat: no-repeat;
+	background-size: cover;*/	
+}
+
+#snow{
+	/*background-color:red;*/
+	/*background-image: url("#{ resource['images/neige_gif_1.gif']}");*/
+}
+
+
+h1{
+	color:red;
+}

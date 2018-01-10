@@ -24,7 +24,7 @@
 	Nom de la categorie:<h:inputText value="#{categorieMB.categorie.nomCategorie}" />
 	Description:<h:inputText value="#{categorieMB.categorie.description}" />
 	
-	 Photo:<p:fileUpload mode="advanced" auto="true" fileUploadListener="#{categorieMB.upload}" update="idImg" />    
+	 Photo:<p:fileUpload mode="advanced" auto="true" fileUploadListener="#{categorieMB.upload}" update="idImg" width="80px" height="60px" />    
      <h:graphicImage id="idImg"  value="#{categorieMB.image}"/>          
      
 		</h:panelGrid>
