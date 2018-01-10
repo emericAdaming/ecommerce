@@ -46,6 +46,7 @@ public class ProduitManagedBean implements Serializable {
 
 	public ProduitManagedBean() {
 		this.produit = new Produit();
+		this.categorie=new Categorie();
 	}
 
 	@PostConstruct
@@ -131,12 +132,18 @@ public class ProduitManagedBean implements Serializable {
 		System.out.println("Enregistrement Produit");
 		
 		//Ajouter methode getCategorieByName ???
-		this.produit.setCategorie(categorieService.getCategorieByName(this.categorie));
 		
-		produitService.addProduit(produit);
+		Categorie categorieByName=categorieService.getCategorieByName(this.categorie);
 
+		this.produit.setCategorie(categorieByName);
+		
+		produitService.addProduit(this.produit);
+
+		System.out.println("*************CATEGORIE*****************"+this.categorie);
+		
+		
 		// Récupérer la nouvelle liste à partir de la BDD
-		this.listeProduits = produitService.getProduitsCategorie(this.categorie);
+		this.listeProduits = produitService.getProduitsCategorie(categorieByName);
 
 		// Metre à jour la liste dans la session
 		maSession.setAttribute("listeProduits", this.listeProduits);

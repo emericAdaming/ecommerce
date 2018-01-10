@@ -85,7 +85,7 @@ public class CategorieDaoImpl implements ICategorieDao {
 		// Envoyer la requete et récupérer le résultat
 		Categorie categorieOut=(Categorie) query.getSingleResult();
 		
-		return null;
+		return categorieOut;
 	}
 
 }
