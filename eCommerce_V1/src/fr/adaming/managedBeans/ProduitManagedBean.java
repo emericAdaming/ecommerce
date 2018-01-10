@@ -19,6 +19,7 @@ import javax.faces.context.FacesContext;
 
 import fr.adaming.modele.Categorie;
 import fr.adaming.modele.Produit;
+import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "produitMB")
@@ -28,6 +29,9 @@ public class ProduitManagedBean implements Serializable {
 	@EJB
 	private IProduitService produitService;
 
+	@EJB
+	private ICategorieService categorieService;
+	
 	private Produit produit;
 
 	private List<Produit> listeProduits;
@@ -125,6 +129,10 @@ public class ProduitManagedBean implements Serializable {
 
 	public String ajouterProduit() {
 		System.out.println("Enregistrement Produit");
+		
+		//Ajouter methode getCategorieByName ???
+		this.produit.setCategorie(categorieService.getCategorieByName(this.categorie));
+		
 		produitService.addProduit(produit);
 
 		// Récupérer la nouvelle liste à partir de la BDD

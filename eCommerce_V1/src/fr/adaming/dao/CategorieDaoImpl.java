@@ -69,4 +69,23 @@ public class CategorieDaoImpl implements ICategorieDao {
 		return null;
 	}
 
+
+	@Override
+	public Categorie getCategorieByName(Categorie c) {
+		
+		// Ecrire la requete
+		String req="SELECT c FROM Categorie AS c WHERE c.nomCategorie=:pNomCategorie";
+		
+		// On crée la query
+		Query query=em.createQuery(req);
+		
+		// PAramètres
+		query.setParameter("pNomCategorie", c.getNomCategorie());
+		
+		// Envoyer la requete et récupérer le résultat
+		Categorie categorieOut=(Categorie) query.getSingleResult();
+		
+		return null;
+	}
+
 }

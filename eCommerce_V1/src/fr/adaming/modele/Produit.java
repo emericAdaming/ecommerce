@@ -62,6 +62,7 @@ public class Produit {
 		this.quantite = quantite;
 		this.selectionne = selectionne;
 		this.photo = photo;
+		this.categorie = categorie;
 	}
 
 

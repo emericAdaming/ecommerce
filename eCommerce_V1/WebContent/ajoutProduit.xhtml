@@ -36,7 +36,7 @@
 	
 	</h:panelGrid>
 	<p:commandButton value="Ajouter" action="#{produitMB.ajouterProduit}" >
-	<f:setPropertyActionListener value="#{categorieMB.categorie.nomCategorie}" target="#{produitMB.produit.categorie}"></f:setPropertyActionListener>
+	<f:setPropertyActionListener value="#{categorieMB.categorie.nomCategorie}" target="#{produitMB.categorie.nomCategorie}"></f:setPropertyActionListener>
 	</p:commandButton>
 	</h:form>
 </h:body>

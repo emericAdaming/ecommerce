@@ -16,4 +16,6 @@ public interface ICategorieService {
 	
 	public byte[] getCategorieById(int id_categorie);
 
+	public Categorie getCategorieByName(Categorie c);
+	
 }

@@ -31,4 +31,10 @@ public class CategorieServiceImpl implements ICategorieService{
 
 		return categorieDao.getCategorieById(id_categorie);
 	}
+
+	@Override
+	public Categorie getCategorieByName(Categorie c) {
+		// TODO Auto-generated method stub
+		return categorieDao.getCategorieByName(c);
+	}
 }
