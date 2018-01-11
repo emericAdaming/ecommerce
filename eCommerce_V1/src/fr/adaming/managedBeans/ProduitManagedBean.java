@@ -31,7 +31,7 @@ public class ProduitManagedBean implements Serializable {
 
 	@EJB
 	private ICategorieService categorieService;
-	
+
 	private Produit produit;
 
 	private List<Produit> listeProduits;
@@ -39,14 +39,14 @@ public class ProduitManagedBean implements Serializable {
 	private Categorie categorie;
 
 	private String image;
-	
+
 	private HttpSession maSession;
 
 	// Constructeur
 
 	public ProduitManagedBean() {
 		this.produit = new Produit();
-		this.categorie=new Categorie();
+		this.categorie = new Categorie();
 	}
 
 	@PostConstruct
@@ -54,7 +54,7 @@ public class ProduitManagedBean implements Serializable {
 		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
 	}
-	
+
 	// Getters & Setters
 
 	public IProduitService getProduitService() {
@@ -130,27 +130,65 @@ public class ProduitManagedBean implements Serializable {
 
 	public String ajouterProduit() {
 		System.out.println("Enregistrement Produit");
-		
-		//Ajouter methode getCategorieByName ???
-		
-		Categorie categorieByName=categorieService.getCategorieByName(this.categorie);
 
+		// Récupérer la categorie a partir du nom
+
+		Categorie categorieByName = categorieService.getCategorieByName(this.categorie);
+
+		// Attribuer la catégorie au produit à ajouter
 		this.produit.setCategorie(categorieByName);
-		
+
+		// Ajouter le produit
 		produitService.addProduit(this.produit);
 
-		System.out.println("*************CATEGORIE*****************"+this.categorie);
-		
-		
 		// Récupérer la nouvelle liste à partir de la BDD
 		this.listeProduits = produitService.getProduitsCategorie(categorieByName);
 
 		// Metre à jour la liste dans la session
 		maSession.setAttribute("listeProduits", this.listeProduits);
-		
+
 		produit = null;
 		image = null;
 		return "accueil";
 	}
 
+	public String supprimerProduit() {
+
+		// Supprimer le produit
+		produitService.deleteProduit(this.produit);
+
+		// Récupérer la nouvelle liste à partir de la BDD
+		this.listeProduits = produitService.getProduitsCategorie(this.categorie);
+
+		// Metre à jour la liste dans la session
+		maSession.setAttribute("listeProduits", this.listeProduits);
+
+		produit = null;
+		image = null;
+		return "accueil";
+
+	}
+
+	public String updateProduit() {
+
+		// Récupérer la categorie a partir du nom
+
+		Categorie categorieByName = categorieService.getCategorieByName(this.categorie);
+
+		// Attribuer la catégorie au produit à ajouter
+		this.produit.setCategorie(categorieByName);
+
+		// Modifier le produit
+		produitService.updateProduit(this.produit);
+
+		// Récupérer la nouvelle liste à partir de la BDD
+		this.listeProduits = produitService.getProduitsCategorie(categorieByName);
+
+		// Metre à jour la liste dans la session
+		maSession.setAttribute("listeProduits", this.listeProduits);
+
+		produit = null;
+		image = null;
+		return "produits";
+	}
 }

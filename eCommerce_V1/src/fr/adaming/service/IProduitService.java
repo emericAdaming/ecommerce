@@ -16,4 +16,8 @@ public interface IProduitService {
 	
 	public Produit addProduit(Produit p);
 	
+	public void deleteProduit(Produit p);
+	
+	public Produit updateProduit(Produit p);
+	
 }

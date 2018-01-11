@@ -33,5 +33,18 @@ public class ProduitServiceImpl implements IProduitService{
 		// TODO Auto-generated method stub
 		return produitDao.addProduit(p);
 	}
+
+	@Override
+	public void deleteProduit(Produit p) {
+
+		produitDao.deleteProduit(p);
+		
+	}
+
+	@Override
+	public Produit updateProduit(Produit p) {
+		// TODO Auto-generated method stub
+		return produitDao.updateProduit(p);
+	}
 	
 }

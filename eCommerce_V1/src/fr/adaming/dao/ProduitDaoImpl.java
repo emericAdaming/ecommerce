@@ -66,4 +66,42 @@ public class ProduitDaoImpl implements IProduitDao {
 		return p;
 	}
 
+	@Override
+	public void deleteProduit(Produit p) {
+
+		// Ecrire la requete
+		String req="DELETE FROM Produit AS p WHERE p.idProduit=:pIdProduit";
+		
+		// Query 
+		Query query=em.createQuery(req);
+		
+		// Parametres
+		query.setParameter("pIdProduit", p.getIdProduit());
+		
+		// Envoyer la requete
+		query.executeUpdate();
+		
+		
+		
+	}
+
+	@Override
+	public Produit updateProduit(Produit p) {
+		
+		// Ecrire la requete
+		Produit pOut=em.find(Produit.class, p.getIdProduit());
+		pOut.setDesignation(p.getDesignation());
+		pOut.setDescription(p.getDescription());
+		pOut.setPrix(p.getPrix());
+		pOut.setQuantite(p.getQuantite());
+		pOut.setPhoto(p.getPhoto());
+		pOut.setCategorie(p.getCategorie());
+		
+		em.merge(pOut);
+		
+		return pOut;
+	}
+	
+	
+
 }
