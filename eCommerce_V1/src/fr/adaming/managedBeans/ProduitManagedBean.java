@@ -147,24 +147,29 @@ public class ProduitManagedBean implements Serializable {
 		// Metre à jour la liste dans la session
 		maSession.setAttribute("listeProduits", this.listeProduits);
 
-		produit = null;
-		image = null;
+		produit = new Produit();
+		image = "";
 		return "accueil";
 	}
 
 	public String supprimerProduit() {
 
+		System.out.println("***************SUPPRIMER PRODUIT****************");
+		System.out.println(this.produit);
+		
 		// Supprimer le produit
 		produitService.deleteProduit(this.produit);
 
+		System.out.println(this.categorie);
+		
 		// Récupérer la nouvelle liste à partir de la BDD
 		this.listeProduits = produitService.getProduitsCategorie(this.categorie);
 
 		// Metre à jour la liste dans la session
 		maSession.setAttribute("listeProduits", this.listeProduits);
 
-		produit = null;
-		image = null;
+		produit = new Produit();
+		image = "";
 		return "accueil";
 
 	}
@@ -187,8 +192,8 @@ public class ProduitManagedBean implements Serializable {
 		// Metre à jour la liste dans la session
 		maSession.setAttribute("listeProduits", this.listeProduits);
 
-		produit = null;
-		image = null;
-		return "produits";
+		produit = new Produit();
+		image = "";
+		return "accueil";
 	}
 }

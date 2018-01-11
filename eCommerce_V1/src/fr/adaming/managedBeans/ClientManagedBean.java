@@ -89,7 +89,7 @@ public class ClientManagedBean implements Serializable {
 			System.out.println("!!!!!!!! Message session cree !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			message.setFrom(new InternetAddress("ecommerce44000@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse("eme.guibert49@gmail.com"));
+					InternetAddress.parse("alexandre.cocagne@gmail.com"));
 			System.out.println("!!!!!!!! Destinataire et envoteur done !!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			message.setSubject("Testing Subject");
 			message.setText("Dear Mail Crawler," +

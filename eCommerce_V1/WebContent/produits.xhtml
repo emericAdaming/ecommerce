@@ -63,10 +63,30 @@
 		</p:column>
 
 
-		<c:when test="${not empty sessionScope.adminSession}">
+		<c:if test="${not empty sessionScope.adminSession}">
 			<p:column>
+				<h:form>
+					<p:commandButton value="Supprimer produit"
+						action="#{produitMB.supprimerProduit}" update="@all">
+						<f:setPropertyActionListener value="#{pro}"
+							target="#{produitMB.produit}"></f:setPropertyActionListener>
+					</p:commandButton>
+				</h:form>
 			</p:column>
-		</c:when>
+
+		</c:if>
+		<c:if test="${not empty sessionScope.adminSession}">
+			<p:column>
+				<h:form>
+					<p:commandButton value="Modifier produit"
+						action="modifProduit.xhtml" update="@all">
+						<f:setPropertyActionListener value="#{pro}"
+							target="#{produitMB.produit}"></f:setPropertyActionListener>
+					</p:commandButton>
+				</h:form>
+			</p:column>
+
+		</c:if>
 
 
 	</p:dataTable>
