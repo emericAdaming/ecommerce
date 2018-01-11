@@ -17,6 +17,7 @@
     		<to-view-id>ajoutCategorie.xhtml</to-view-id>
     	</navigation-case>
     	
-	 </navigation-rule>
+</navigation-rule>
+	 
 	 
 </faces-config>

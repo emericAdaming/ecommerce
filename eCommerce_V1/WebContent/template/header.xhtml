@@ -20,14 +20,19 @@
     <p:menubar>
 
 
-         <p:menuitem value="Accueil" url="accueil.xhtml"  />
+         <p:menuitem icon="ui-icon-home" value="Accueil" url="accueil.xhtml"  />
   
  
-         <p:menuitem value="Panier" url="panier.xhtml" action="#{ligneCommandeMB.getAllLignes}" />
-   
-
- 		 <p:menuitem value="connection admin" url="login.xhtml" />
- 
+         <p:menuitem icon="ui-icon-suitcase" value="Panier" url="panier.xhtml" action="#{ligneCommandeMB.getAllLignes}" />
+   		
+   		   
+   		 <p:menuitem icon="ui-icon-home" value="admin" url="login.xhtml"  />
+   		 
+		<f:facet name="options">
+            <p:inputText style="margin-right:10px" placeholder="Search"/>
+			 <p:commandButton value="admin" icon="ui-icon-plus" action="agentMB.goConnection"  />      
+        </f:facet>
+ 	  
     </p:menubar>
 </h:form>
 	</ui:composition>

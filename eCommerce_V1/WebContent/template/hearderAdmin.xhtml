@@ -20,7 +20,7 @@
     <p:menubar>
 
 
-            <p:menuitem value="Accueil" url="accueil.xhtml"  />
+            <p:menuitem icon="ui-icon-home" value="Accueil" url="accueil.xhtml"  />
  
     
         <p:submenu label="Categorie" >
@@ -43,13 +43,14 @@
         </p:submenu>
  
 
-         <p:menuitem value="Panier" url="panier.xhtml" action="#{ligneCommandeMB.getAllLignes}" />
+         <p:menuitem icon="ui-icon-suitcase" value="Panier" url="panier.xhtml" action="#{ligneCommandeMB.getAllLignes}" />
    
- 
-
- 
- 		 <p:menuitem value="deconnection admin" action="#{adminMB.seDeconnecter}"  />
- 
+ 		<p:menuitem icon="ui-icon-extlink" value="logout admin" action="#{adminMB.seDeconnecter}"  />
+ 		<f:facet name="options">
+            <p:inputText style="margin-right:10px" placeholder="Search"/>
+            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" action="#{adminMB.seDeconnecter}" />         
+        </f:facet>
+ 		 
     </p:menubar>
 </h:form>
 	</ui:composition>

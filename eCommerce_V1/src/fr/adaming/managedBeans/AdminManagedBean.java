@@ -79,5 +79,9 @@ public class AdminManagedBean implements Serializable {
 		System.out.println("Admin session="+maSession.getAttribute("adminSession"));		
 		return "deconnection";
 	}
+	
+	public String goConnection(){
+		return "login";
+	}
 
 }
