@@ -112,17 +112,24 @@ public class ClientManagedBean implements Serializable {
 					InternetAddress.parse("eme.guibert49@gmail.com"));
 			System.out.println("!!!!!!!! Destinataire et envoteur done !!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			message.setSubject("Sujet du mail");
-			message.setText("Salut  !!!!!," +
+			/*message.setText("Salut  !!!!!," +
 					"\n\n Regarde le pdf !!"+
 					"\n\n Cordialment! \n l'equipe ecommerce");
+			message.setText("Dear Mail Crawler,"
+					+ "\n\n No spam to my email, please!");*/
 			System.out.println("!!!!!!!!!!!!!! Piece jointe !!!!!!!!!!!!!!!!!!!!!!!!!!");
 			MimeMultipart mp = new MimeMultipart();
 			MimeBodyPart mbp1 = new MimeBodyPart();
+			MimeBodyPart mbp2 = new MimeBodyPart();
 				mbp1.attachFile(new File("C:/Users/emegu/Documents/Test4.pdf"));
+				mbp2.setText("Salut  !!!!!," +
+					"\n\n Regarde le pdf !!"+
+					"\n\n Cordialment! \n l'equipe ecommerce");
 				/*ByteArrayDataSource ds = new ByteArrayDataSource(); 
 				mbp1.setDataHandler(new DataHandler(ds));
 				mbp1.setFileName("Test.pdf");*/
 		    mp.addBodyPart(mbp1);
+		    mp.addBodyPart(mbp2);
 			message.setContent(mp);
 			System.out.println("!!!!!!!! Debut transport !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			Transport.send(message);
@@ -154,6 +161,8 @@ public class ClientManagedBean implements Serializable {
 		        // step 3
 		        document.open();
 		        Image icon = Image.getInstance("C:/Users/emegu/Pictures/chauve.jpg");
+		        icon.scaleAbsolute(100, 100);
+		        // icon.setAbsolutePosition(absoluteX, absoluteY);
 		        // step 4
 		       // document.addCreationDate();
 		        document.add(new Paragraph(
