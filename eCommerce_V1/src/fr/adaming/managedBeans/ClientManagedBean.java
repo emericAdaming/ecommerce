@@ -66,7 +66,8 @@ public class ClientManagedBean implements Serializable {
 		return "ajoutClient";
 	}
 	
-	
+//**********************************************************************************************************	
+//****************************** Mail & Pdf ****************************************************************
 	
 	class GMailAuthenticator extends Authenticator {
 	     String user;

@@ -8,9 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="produits")
@@ -24,7 +26,10 @@ public class Produit {
 	private double prix;
 	private int quantite;
 	private boolean selectionne;
+	@Lob
 	private byte[] photo;
+	@Transient
+	private String image;
 	
 	@OneToMany(mappedBy="produit",cascade=CascadeType.ALL)
 	private List<LigneCommande> ligneCommande;
@@ -147,8 +152,22 @@ public class Produit {
 	public void setLigneCommande(List<LigneCommande> ligneCommande) {
 		this.ligneCommande = ligneCommande;
 	}
+	
+	public String getImage() {
+		return image;
+	}
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	
 
 //************ 	// toString **********************************************************
+
+
+
 
 	@Override
 	public String toString() {

@@ -1,6 +1,7 @@
 package fr.adaming.managedBeans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -104,10 +105,23 @@ public class ProduitManagedBean implements Serializable {
 		System.out.println("Categorie du produit: " + this.categorie);
 		System.out.println(" %%%%%%%%%%%%%%% Categorie du produit: " + this.categorie.getIdCategorie()
 				+ "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		this.listeProduits = produitService.getProduitsCategorie(this.categorie);
-
+		List<Produit>   listOut = produitService.getProduitsCategorie(this.categorie);
+		this.listeProduits=new ArrayList<Produit>();
+		
 		// On ajoute la liste de produits dans la session
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeProduits", listeProduits);
+		
+		for(Produit element:listOut){
+			if(element.getPhoto() == null){
+				element.setImage(null);
+			}else{
+				element.setImage("data:image/png;base64,"+Base64.encodeBase64String(element.getPhoto()));
+			}
+			this.listeProduits.add(element);
+		}
+		
+		
+		
 		return "produits";
 
 	}

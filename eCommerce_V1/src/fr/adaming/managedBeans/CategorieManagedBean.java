@@ -128,8 +128,8 @@ public class CategorieManagedBean implements Serializable {
 	public String ajouterCategorie(){
 		System.out.println("Enregistrement image");
 		categorieService.addCategorie(categorie);
-		categorie=null;
-		image=null;
+		categorie=new Categorie();
+		image=" ";
 		return "accueil";
 	}
 
