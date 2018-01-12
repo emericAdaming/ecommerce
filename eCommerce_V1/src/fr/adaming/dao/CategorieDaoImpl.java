@@ -105,4 +105,21 @@ public class CategorieDaoImpl implements ICategorieDao {
 			query.executeUpdate();
 
 	}
+
+
+	@Override
+	public Categorie updateCategorie(Categorie c) {
+		
+		// Trouver la categorie à modifier
+		Categorie categorieOut=em.find(Categorie.class, c.getIdCategorie());
+		categorieOut.setDescription(c.getDescription());
+		categorieOut.setNomCategorie(c.getNomCategorie());
+		categorieOut.setPhoto(c.getPhoto());
+		
+		em.merge(categorieOut);
+		
+		return categorieOut;
+	}
+	
+	
 }

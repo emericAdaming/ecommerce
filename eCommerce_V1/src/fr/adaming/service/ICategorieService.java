@@ -20,4 +20,6 @@ public interface ICategorieService {
 	
 	public void deleteCategorie(Categorie c);
 	
+	public Categorie updateCategorie(Categorie c);
+	
 }

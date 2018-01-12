@@ -36,8 +36,14 @@
 	  	</p:commandLink>
 	  	<div class="ui-g-12 "><h:outputText style="color:black" value="#{categorie.description}"/></div>
 	  	<c:if test="${not empty sessionScope.adminSession}">
-	  	<div class="ui-g-6 "> <p:commandButton value="Supprimer" ></p:commandButton> </div>
-	  	<div class="ui-g-6 "> <p:commandButton value="Modifier" ></p:commandButton> </div>
+	  	<div class="ui-g-6 "> <p:commandButton value="Supprimer" action="#{categorieMB.supprimerCategorie}" update="@all">
+	  	<f:setPropertyActionListener value="#{categorie}"
+						target="#{categorieMB.categorie}"></f:setPropertyActionListener>
+	  	</p:commandButton> </div>
+	  	<div class="ui-g-6 "> <p:commandButton value="Modifier" action="modifierCategorie.xhtml">
+	  	<f:setPropertyActionListener value="#{categorie}"
+						target="#{categorieMB.categorie}"></f:setPropertyActionListener>
+	  	</p:commandButton> </div>
 	  	</c:if>
 	  </div>
 		<div class="ui-g-12"></div>

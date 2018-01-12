@@ -43,4 +43,10 @@ public class CategorieServiceImpl implements ICategorieService{
 		// TODO Auto-generated method stub
 		categorieDao.deleteCategorie(c);
 	}
+
+	@Override
+	public Categorie updateCategorie(Categorie c) {
+		// TODO Auto-generated method stub
+		return categorieDao.updateCategorie(c);
+	}
 }

@@ -18,5 +18,7 @@ public interface ICategorieDao {
 	public Categorie getCategorieByName(Categorie c);
 	
 	public void deleteCategorie(Categorie c);
+	
+	public Categorie updateCategorie(Categorie c);
 
 }
