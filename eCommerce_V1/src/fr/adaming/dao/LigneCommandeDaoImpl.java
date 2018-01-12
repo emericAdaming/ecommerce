@@ -79,7 +79,7 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	}
 
 	@Override
-	public LigneCommande updateLigneCommande(LigneCommande ligne) {
+	public LigneCommande updateLigneQte(LigneCommande ligne) {
 
 		// Ecrire la requête pour récupérer la qté d'origine
 		String req = "SELECT l.quantite FROM LigneCommande l WHERE l.id=:pIdLigne";
@@ -152,10 +152,24 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		for (LigneCommande ligne : listeLignes) {
 			total = total + ligne.getPrix();
 		}
-		
-		System.out.println("**************************************TOTAL*"+total);
-		
+
+		System.out.println("**************************************TOTAL*" + total);
+
 		return total;
+	}
+
+	@Override
+	public LigneCommande updateLigneCommande(LigneCommande ligne) {
+		// Récupérer la ligne de commande
+		LigneCommande ligneOut = em.find(LigneCommande.class, ligne.getId());
+//		ligneOut.setPrix(ligne.getPrix());
+//		ligneOut.setProduit(ligne.getProduit());
+//		ligneOut.setQuantite(ligne.getQuantite());
+		ligneOut.setCommande(ligne.getCommande());
+
+		em.merge(ligneOut);
+
+		return ligneOut;
 	}
 
 }

@@ -40,6 +40,8 @@ public class LigneCommande {
 		super();
 		this.quantite = quantite;
 		this.prix = prix;
+		
+	
 	}
 
 	
@@ -91,7 +93,8 @@ public class LigneCommande {
 	
 	@Override
 	public String toString() {
-		return "LigneCommande [quantite=" + quantite + ", prix=" + prix + "]";
+		return "LigneCommande [id=" + id + ", quantite=" + quantite + ", prix=" + prix + ", commande=" + commande
+				+ ", produit=" + produit + "]";
 	}
 	
 

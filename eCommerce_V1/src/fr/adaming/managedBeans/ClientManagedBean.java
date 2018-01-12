@@ -76,7 +76,8 @@ public class ClientManagedBean implements Serializable {
 	
 	public String ajouterClient(){
 		this.client=clientService.ajouterClient(this.client);
-		return "ajoutClient";
+	
+		return "commande";
 	}
 	
 	

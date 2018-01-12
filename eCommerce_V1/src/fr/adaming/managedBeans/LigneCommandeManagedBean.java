@@ -99,7 +99,7 @@ public class LigneCommandeManagedBean implements Serializable {
 			ligneExist.setQuantite(this.ligne.getQuantite());
 			System.out.println("la quantite a ete rajouter");
 			// On met à jour la ligne de commande existente
-			ligneCommandeService.updateLigneCommande(ligneExist);
+			ligneCommandeService.updateLigneQte(ligneExist);
 			System.out.println("REcup nouvelle liste du panier");
 			// Récupérer la nouvelle liste à partir de la BDD
 			this.listeLignes = ligneCommandeService.getAllLignes();
@@ -138,6 +138,7 @@ public class LigneCommandeManagedBean implements Serializable {
 
 		try {
 			ligneCommandeService.supprimerLigneCommande(this.ligne);
+			
 
 			// Récupérer la nouvelle liste à partir de la BDD
 			this.listeLignes = ligneCommandeService.getAllLignes();

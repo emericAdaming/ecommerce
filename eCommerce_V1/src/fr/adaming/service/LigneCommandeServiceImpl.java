@@ -33,9 +33,9 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService{
 	}
 
 	@Override
-	public LigneCommande updateLigneCommande(LigneCommande ligne) {
+	public LigneCommande updateLigneQte(LigneCommande ligne) {
 		// TODO Auto-generated method stub
-		return ligneCommandeDao.updateLigneCommande(ligne);
+		return ligneCommandeDao.updateLigneQte(ligne);
 	}
 
 	@Override
@@ -54,6 +54,12 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService{
 	public int totalPanier(List<LigneCommande> listeLignes) {
 		// TODO Auto-generated method stub
 		return ligneCommandeDao.totalPanier(listeLignes);
+	}
+
+	@Override
+	public LigneCommande updateLigneCommande(LigneCommande ligne) {
+		// TODO Auto-generated method stub
+		return ligneCommandeDao.updateLigneCommande(ligne);
 	}
 
 	
