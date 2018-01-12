@@ -45,6 +45,8 @@
 				
 				<p:commandButton value="+"
 					action="#{ligneCommandeMB.ajouterLigneCommande}" update="@all">
+					<f:setPropertyActionListener value="#{pro}"
+						target="#{ligneCommandeMB.ligne.produit}"></f:setPropertyActionListener>
 					<f:setPropertyActionListener value="#{pro.quantiteSelect}"
 						target="#{ligneCommandeMB.ligne.quantite}"></f:setPropertyActionListener>
 				</p:commandButton>

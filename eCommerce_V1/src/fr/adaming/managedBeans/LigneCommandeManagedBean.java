@@ -116,13 +116,17 @@ public class LigneCommandeManagedBean implements Serializable {
 			int prix = (int) (this.ligne.getQuantite() * this.ligne.getProduit().getPrix());
 			this.ligne.setPrix(prix);
 			System.out.println("************"+ligne+"*****************************");
-			this.ligne = ligneCommandeService.ajouterLigneCommande(this.ligne);
+			try{
+				this.ligne = ligneCommandeService.ajouterLigneCommande(this.ligne);
 
-			// Récupérer la nouvelle liste à partir de la BDD
-			this.listeLignes = ligneCommandeService.getAllLignes();
+				// Récupérer la nouvelle liste à partir de la BDD
+				this.listeLignes = ligneCommandeService.getAllLignes();
 
-			// Metre à jour la liste dans la session
-			maSession.setAttribute("listeLignes", this.listeLignes);
+				// Metre à jour la liste dans la session
+				maSession.setAttribute("listeLignes", this.listeLignes);
+			}catch(Exception e2){
+				System.out.println("%%%%%%%%%%%%%% Erreur dans ligne inexistante %%%%%%%%%%%%%%%");
+			}
 
 			return "produits";
 		}
