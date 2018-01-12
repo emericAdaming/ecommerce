@@ -38,6 +38,7 @@ import fr.adaming.service.IClientService;
 @RequestScoped
 public class ClientManagedBean implements Serializable {
 
+	
 	@EJB
 	private IClientService clientService;
 	

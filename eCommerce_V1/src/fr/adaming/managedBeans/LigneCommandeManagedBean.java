@@ -112,6 +112,7 @@ public class LigneCommandeManagedBean implements Serializable {
 		} catch (Exception e) {
 			// Si la ligne de commande n'existe pas
 			System.out.println("Ligne de commande inexistante");
+			System.out.println(ligne);
 			// Ajouter la ligne de commande
 			int prix = (int) (this.ligne.getQuantite() * this.ligne.getProduit().getPrix());
 			this.ligne.setPrix(prix);
