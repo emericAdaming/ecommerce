@@ -17,7 +17,8 @@
 	<h:form enctype="multipart/form-data">
 		<h:panelGrid columns="2">
 	
-	ID : <h:outputText value="#{categorieMB.categorie.idCategorie}"/>
+	<br/><h:inputHidden value="#{categorieMB.categorie.idCategorie}" />
+	ID : <h:inputText value="#{categorieMB.categorie.idCategorie}" disabled="true"/>
 	Nom de la categorie:<h:inputText value="#{categorieMB.categorie.nomCategorie}" />
 	Description:<h:inputText value="#{categorieMB.categorie.description}" />
 	
@@ -26,7 +27,11 @@
      
 		</h:panelGrid>
 		
-		<p:commandButton value="Modifier Categorie" action="#{categorieMB.modifierCategorie}" update="@all"></p:commandButton>
+		<p:commandButton value="Modifier Categorie" action="#{categorieMB.modifierCategorie}" update="@all">
+		
+		<f:setPropertyActionListener value="#{categorieMB.categorie.idCategorie}"
+						target="#{categorieMB.categorie.idCategorie}"></f:setPropertyActionListener>
+		</p:commandButton>
 		
 	</h:form>
 	

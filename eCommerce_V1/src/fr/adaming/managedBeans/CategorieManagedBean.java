@@ -138,8 +138,10 @@ public class CategorieManagedBean implements Serializable {
 
 	// Méthodes métiers
 	public String modifierCategorie() {
-		System.out.println("Enregistrement image");
+		System.out.println("**************MODIFIER CATEGORIE*******************");
 
+		System.out.println("**************CATEGORIE*************"+categorie);
+		
 		// Modifier la catégorie
 		categorieService.updateCategorie(categorie);
 		categorie = new Categorie();
