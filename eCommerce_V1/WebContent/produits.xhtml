@@ -27,25 +27,44 @@
 	  
 
 	  <div class="ui-g-12">
-	  <div class="ui-g-12" style="border-style: solid;border-width:1px;border-color:grey;background-color:rgba(30,30,30,0.8)">
+	  <div class="ui-g-12" style="border-style: solid;border-width:1px;border-color:grey;background-color:rgba(230,230,230,0.9)">
 	   		   	
-	   	<div class="ui-g-12  ui-md-3" >
+	   	<div class="ui-g-3 " >
 	 	 	<h:graphicImage  class="imageTaille" value="#{pro.image}"/>
 		</div>
-	  	<div class="ui-g-12 ui-md-4 "><h:outputText style="color:black" value="#{pro.description}"/></div>
-	  	<div class="ui-g-12  " >
+	  	<div class="ui-g-7"><h:outputText style="color:black" value="#{pro.description}"/></div>
+	    <div class="ui-g-2" style="background-color:rgba(130,230,130,0.6)" >
+				<div class="ui-g-12"/>
+				prix:
+				<div class="ui-g-12"/>
+				<h:form>
+				<div class="ui-g-6">
+					<h:inputText style="width:50px" value="#{ligneCommandeMB.ligne.quantite}" placeholder="Qté" />
+				</div>
+				<div class="ui-g-6">
+				<p:commandButton value="+"
+					action="#{ligneCommandeMB.ajouterLigneCommande}" update="@all">
+					<f:setPropertyActionListener value="#{pro}"
+						target="#{ligneCommandeMB.ligne.produit}"></f:setPropertyActionListener>
+				</p:commandButton>
+				</div>
+				</h:form>
+				<div class="ui-g-12"><h:outputText style="color:black" value="Quantite:"/></div>
+						
+				<div class="ui-g-12"><h:outputText style="color:black" value="Reduction:"/></div>
+				
+		</div>
+	  	
 	  		<c:if test="${not empty sessionScope.adminSession}">
-	  		<div class="ui-g-6 "> <p:commandButton value="Supprimer" ></p:commandButton> </div>
-	  		<div class="ui-g-6 "> <p:commandButton value="Modifier" ></p:commandButton> </div>
+	  			<div class="ui-g-12  " >
+	  				<div class="ui-g-2 "> <p:commandButton value="Supprimer" ></p:commandButton> </div>
+	  				<div class="ui-g-2 "> <p:commandButton value="Modifier" ></p:commandButton> </div>
+	  			  	</div>
 	  		</c:if>
-	  	</div>
 	  </div>
-		<div class="ui-g-12"></div>
+	  <div class="ui-g-12"></div>
 	</div>
-	
-	<div class="ui-g-12 ui-md-1"></div>
-	
-
+		
 	</c:forEach>
 	 </h:form>
  </div>

@@ -18,7 +18,7 @@
 	</ui:insert>
 	
 		
-<p:outputPanel id="lol">
+<p:outputPanel id="lol3">
 	
 <div class="ui-g" style="margin-left:5%" >
     <div class="ui-g-12">----</div>
@@ -30,7 +30,7 @@
 	  <div class="ui-g-12 " style="border-style: solid;border-width:1px;border-color:grey;background-color:rgba(215,215,215,0.8)">
 	   	
 	   	<p:commandLink action="#{produitMB.getProduitsCategorie}">
-	   	<div class="ui-g-12" style="color:black">Titre</div>
+	   	<div class="ui-g-12" style="color:black"><h:outputText style="color:black" value="#{categorie.nomCategorie}"/></div>
 	  	<f:setPropertyActionListener value="#{categorie}" target="#{produitMB.categorie}"></f:setPropertyActionListener>
 	  	<h:graphicImage  class="imageTaille" value="#{categorie.image}"/>
 	  	</p:commandLink>
