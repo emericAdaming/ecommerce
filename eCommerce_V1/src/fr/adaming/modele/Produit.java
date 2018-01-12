@@ -26,6 +26,8 @@ public class Produit {
 	private double prix;
 	private int quantite;
 	private boolean selectionne;
+	@Transient
+	private int quantiteSelect;
 	@Lob
 	private byte[] photo;
 	@Transient
@@ -153,6 +155,18 @@ public class Produit {
 		this.ligneCommande = ligneCommande;
 	}
 	
+	
+	
+	public int getQuantiteSelect() {
+		return quantiteSelect;
+	}
+
+
+	public void setQuantiteSelect(int quantiteSelect) {
+		this.quantiteSelect = quantiteSelect;
+	}
+
+
 	public String getImage() {
 		return image;
 	}
