@@ -87,14 +87,14 @@ public class LigneCommandeManagedBean implements Serializable {
 		System.out.println("Ligne commande quantite:="+this.ligne.getQuantite());
 		//System.out.println("Ligne commande quantite 2:="+this.ligne.getProduit().getQuantiteSelect());
 		System.out.println("Ligne commande quantite 3:="+this.quantiteSelect);
-		if(this.ligne.getQuantite()==0)
-			this.ligne.setQuantite(22);
+
 		LigneCommande ligneExist;
 		try {
+			System.out.println("Debut try 1");
 			ligneExist = ligneCommandeService.isExistLigneCommande(this.ligne);
 
 			// Si la ligne existe déja
-
+			System.out.println("Debut 2");
 			// On indique la quantité à ajouter
 			ligneExist.setQuantite(this.ligne.getQuantite());
 			System.out.println("la quantite a ete rajouter");
@@ -111,10 +111,11 @@ public class LigneCommandeManagedBean implements Serializable {
 
 		} catch (Exception e) {
 			// Si la ligne de commande n'existe pas
-
+			System.out.println("Ligne de commande inexistante");
 			// Ajouter la ligne de commande
 			int prix = (int) (this.ligne.getQuantite() * this.ligne.getProduit().getPrix());
 			this.ligne.setPrix(prix);
+			System.out.println("************"+ligne+"*****************************");
 			this.ligne = ligneCommandeService.ajouterLigneCommande(this.ligne);
 
 			// Récupérer la nouvelle liste à partir de la BDD

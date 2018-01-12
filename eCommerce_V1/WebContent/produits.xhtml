@@ -23,8 +23,8 @@
 <div class="ui-g" style="margin-left:2%;margin-right:2%" >
     <div class="ui-g-12">----</div>
 	
-	 <ui:repeat value="#{sessionScope.listeProduits}" var="pro"> 
-
+	
+	 <c:forEach items="#{sessionScope.listeProduits}" var="pro" varStatus="metadata" >
 	  <div class="ui-g-12">
 	  <div class="ui-g-12" style="border-style: solid;border-width:1px;border-color:grey;background-color:rgba(230,230,230,0.9)">
 	   		   	
@@ -36,20 +36,21 @@
 				<div class="ui-g-12"/>
 				prix:
 				<div class="ui-g-12"/>
-				
+				<h:form>
 				<div class="ui-g-6">
-				<h:inputText style="width:50px" value="#{ligneCommandeMB.quantiteSelect}" placeholder="Qté" />
+				
+				<h:inputText style="width:50px" value="#{pro.quantiteSelect}" placeholder="Qté" />
 				</div>
 				<div class="ui-g-6">
-				<h:form>
+				
 				<p:commandButton value="+"
 					action="#{ligneCommandeMB.ajouterLigneCommande}" update="@all">
 					<f:setPropertyActionListener value="#{pro.quantiteSelect}"
-						target="#{ligneCommandeMB.quantiteSelect}"></f:setPropertyActionListener>
+						target="#{ligneCommandeMB.ligne.quantite}"></f:setPropertyActionListener>
 				</p:commandButton>
-				</h:form>
-				</div>
 				
+				</div>
+				</h:form>
 				<div class="ui-g-12"><h:outputText style="color:black" value="Quantite:"/></div>
 						
 				<div class="ui-g-12"><h:outputText style="color:black" value="Reduction:"/></div>
@@ -66,7 +67,7 @@
 	  <div class="ui-g-12"></div>
 	</div>
 		
-	</ui:repeat>
+	</c:forEach>
 	
  </div>
 	
