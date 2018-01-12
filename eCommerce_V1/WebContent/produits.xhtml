@@ -22,9 +22,8 @@
 	
 <div class="ui-g" style="margin-left:2%;margin-right:2%" >
     <div class="ui-g-12">----</div>
-	<h:form>
-	<c:forEach items="#{sessionScope.listeProduits}" var="pro" varStatus="metadata" >
-	  
+	
+	 <ui:repeat value="#{sessionScope.listeProduits}" var="pro"> 
 
 	  <div class="ui-g-12">
 	  <div class="ui-g-12" style="border-style: solid;border-width:1px;border-color:grey;background-color:rgba(230,230,230,0.9)">
@@ -46,8 +45,6 @@
 					action="#{ligneCommandeMB.ajouterLigneCommande}" update="@all">
 					<f:setPropertyActionListener value="#{pro}"
 						target="#{ligneCommandeMB.ligne.produit}"></f:setPropertyActionListener>
-					<f:setPropertyActionListener value="#{pro.quantiteSelect}"
-						target="#{ligneCommandeMB.ligne.quantite}"></f:setPropertyActionListener>
 				</p:commandButton>
 				</div>
 				</h:form>
@@ -67,11 +64,61 @@
 	  <div class="ui-g-12"></div>
 	</div>
 		
-	</c:forEach>
-	 </h:form>
+	</ui:repeat>
+	
  </div>
 	
 </p:outputPanel>
+
+<p:dataTable var="pro" value="#{sessionScope.listeProduits}">
+		<p:column headerText="ID">
+			<h:outputText value="#{pro.idProduit}" />
+		</p:column>
+
+
+		<p:column>
+			<h:form>
+				<h:inputText value="#{pro.quantiteSelect}"
+					placeholder="Qté" />
+
+				<p:commandButton value="Ajouter au panier"
+					action="#{ligneCommandeMB.ajouterLigneCommande}" update="@all">
+					<f:setPropertyActionListener value="#{pro}"
+						target="#{ligneCommandeMB.ligne.produit}"></f:setPropertyActionListener>
+					<f:setPropertyActionListener value="#{pro.quantiteSelect}"
+						target="#{ligneCommandeMB.ligne.quantite}"></f:setPropertyActionListener>
+				</p:commandButton>
+			</h:form>
+		</p:column>
+
+
+		<c:if test="${not empty sessionScope.adminSession}">
+			<p:column>
+				<h:form>
+					<p:commandButton value="Supprimer produit"
+						action="#{produitMB.supprimerProduit}" update="@all">
+						<f:setPropertyActionListener value="#{pro}"
+							target="#{produitMB.produit}"></f:setPropertyActionListener>
+					</p:commandButton>
+				</h:form>
+			</p:column>
+
+		</c:if>
+		<c:if test="${not empty sessionScope.adminSession}">
+			<p:column>
+				<h:form>
+					<p:commandButton value="Modifier produit"
+						action="modifProduit.xhtml" update="@all">
+						<f:setPropertyActionListener value="#{pro}"
+							target="#{produitMB.produit}"></f:setPropertyActionListener>
+					</p:commandButton>
+				</h:form>
+			</p:column>
+
+		</c:if>
+
+
+	</p:dataTable>
 
 
 </h:body>

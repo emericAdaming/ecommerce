@@ -48,7 +48,7 @@ public class Produit {
 
 
 	public Produit(Long idProduit, String description, String designation, double prix, int quantite,
-			boolean selectionne, byte[] photo) {
+			boolean selectionne, byte[] photo,int quantiteSelect) {
 		super();
 		this.idProduit = idProduit;
 		this.description = description;
@@ -57,11 +57,12 @@ public class Produit {
 		this.quantite = quantite;
 		this.selectionne = selectionne;
 		this.photo = photo;
+		this.quantiteSelect=quantiteSelect;
 	}
 
 
 	public Produit(String description, String designation, double prix, int quantite, boolean selectionne,
-			byte[] photo) {
+			byte[] photo,Categorie categorie,int quantiteSelect) {
 		super();
 		this.description = description;
 		this.designation = designation;
@@ -70,6 +71,7 @@ public class Produit {
 		this.selectionne = selectionne;
 		this.photo = photo;
 		this.categorie = categorie;
+		this.quantiteSelect=quantiteSelect;
 	}
 
 
