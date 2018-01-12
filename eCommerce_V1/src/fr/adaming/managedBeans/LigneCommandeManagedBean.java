@@ -63,7 +63,11 @@ public class LigneCommandeManagedBean implements Serializable {
 	// Méthodes métiers
 
 	public String ajouterLigneCommande() {
-
+		System.out.println("Ajout vers le panier");
+		System.out.println("Ligne commande quantite:="+this.ligne.getQuantite());
+		System.out.println("Ligne commande quantite 2:="+this.ligne.getProduit().getQuantiteSelect());
+		if(this.ligne.getQuantite()==0)
+			this.ligne.setQuantite(22);
 		LigneCommande ligneExist;
 		try {
 			ligneExist = ligneCommandeService.isExistLigneCommande(this.ligne);
@@ -72,10 +76,10 @@ public class LigneCommandeManagedBean implements Serializable {
 
 			// On indique la quantité à ajouter
 			ligneExist.setQuantite(this.ligne.getQuantite());
-
+			System.out.println("la quantite a ete rajouter");
 			// On met à jour la ligne de commande existente
 			ligneCommandeService.updateLigneCommande(ligneExist);
-
+			System.out.println("REcup nouvelle liste du panier");
 			// Récupérer la nouvelle liste à partir de la BDD
 			this.listeLignes = ligneCommandeService.getAllLignes();
 
