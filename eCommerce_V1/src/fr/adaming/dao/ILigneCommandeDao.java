@@ -21,4 +21,6 @@ public interface ILigneCommandeDao {
 	
 	public LigneCommande quantiteLigneCommande(LigneCommande ligne);
 	
+	public int totalPanier(List<LigneCommande> listeLignes);
+	
 }

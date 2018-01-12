@@ -14,6 +14,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.swing.JFileChooser;
 
@@ -30,7 +31,7 @@ import fr.adaming.service.ICategorieService;
 import sun.misc.IOUtils;
 
 @ManagedBean(name="categorieMB")
-@SessionScoped
+@ViewScoped
 public class CategorieManagedBean implements Serializable {
 
 	@EJB
@@ -133,6 +134,13 @@ public class CategorieManagedBean implements Serializable {
 		return "accueil";
 	}
 
+	public String supprimerCategorie(){
+		categorieService.deleteCategorie(this.categorie);
+		categorie=new Categorie();
+		image=" ";
+		return "accueil";
+	}
+	
 	public void getAllCategories(){
 		
 		System.out.println("GET ALL CATEGORIES");

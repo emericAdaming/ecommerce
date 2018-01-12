@@ -16,5 +16,7 @@ public interface ICategorieDao {
 	public byte[] getCategorieById(int id_categorie);
 	
 	public Categorie getCategorieByName(Categorie c);
+	
+	public void deleteCategorie(Categorie c);
 
 }

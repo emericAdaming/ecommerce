@@ -145,4 +145,17 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		return ligneOut;
 	}
 
+	@Override
+	public int totalPanier(List<LigneCommande> listeLignes) {
+		int total = 0;
+
+		for (LigneCommande ligne : listeLignes) {
+			total = total + ligne.getPrix();
+		}
+		
+		System.out.println("**************************************TOTAL*"+total);
+		
+		return total;
+	}
+
 }

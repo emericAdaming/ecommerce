@@ -190,8 +190,11 @@ public class ProduitManagedBean implements Serializable {
 
 	public String updateProduit() {
 
+		System.out.println("***************UPDATE******************");
+		
 		// Récupérer la categorie a partir du nom
 
+		System.out.println("***************CATEGORIE BY NOM******************"+this.categorie);
 		Categorie categorieByName = categorieService.getCategorieByName(this.categorie);
 
 		// Attribuer la catégorie au produit à ajouter

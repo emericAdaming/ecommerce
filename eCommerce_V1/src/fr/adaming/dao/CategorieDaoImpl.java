@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import fr.adaming.modele.Categorie;
+import fr.adaming.modele.Produit;
 
 @Stateless
 public class CategorieDaoImpl implements ICategorieDao {
@@ -88,4 +89,20 @@ public class CategorieDaoImpl implements ICategorieDao {
 		return categorieOut;
 	}
 
+	@Override
+	public void deleteCategorie(Categorie c){
+	
+	// Ecrire la requete
+			String req = "DELETE FROM Categorie AS c WHERE c.idCategorie=:pIdCategorie";
+
+			// Query
+			Query query = em.createQuery(req);
+
+			// Definir les paramètres
+			query.setParameter("pIdCategorie", c.getIdCategorie());
+
+			// Executer la requete
+			query.executeUpdate();
+
+	}
 }

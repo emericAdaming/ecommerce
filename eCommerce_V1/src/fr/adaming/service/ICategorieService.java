@@ -18,4 +18,6 @@ public interface ICategorieService {
 
 	public Categorie getCategorieByName(Categorie c);
 	
+	public void deleteCategorie(Categorie c);
+	
 }

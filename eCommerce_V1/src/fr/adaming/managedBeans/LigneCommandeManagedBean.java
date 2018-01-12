@@ -28,6 +28,8 @@ public class LigneCommandeManagedBean implements Serializable {
 
 	private HttpSession maSession;
 
+	private int total;
+
 	// Constructeurs
 
 	public LigneCommandeManagedBean() {
@@ -48,6 +50,14 @@ public class LigneCommandeManagedBean implements Serializable {
 
 	public void setLigne(LigneCommande ligne) {
 		this.ligne = ligne;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
 	}
 
 	// Méthodes métiers
@@ -103,6 +113,9 @@ public class LigneCommandeManagedBean implements Serializable {
 
 			// Metre à jour la liste dans la session
 			maSession.setAttribute("listeLignes", this.listeLignes);
+			
+			// Récupérer le montant total du panier
+			this.total = ligneCommandeService.totalPanier(this.listeLignes);
 
 			return "panier";
 		} catch (Exception e) {
@@ -113,11 +126,19 @@ public class LigneCommandeManagedBean implements Serializable {
 	}
 
 	public String getAllLignes() {
+
+		System.out.println("**************************GET ALL LIGNES ********************");
+		
 		// Récupérer la nouvelle liste à partir de la BDD
 		this.listeLignes = ligneCommandeService.getAllLignes();
 
 		// Metre à jour la liste dans la session
 		maSession.setAttribute("listeLignes", this.listeLignes);
+
+		System.out.println("**************************LISTE ********************"+this.listeLignes);
+				
+		// Récupérer le montant total du panier
+		this.total = ligneCommandeService.totalPanier(this.listeLignes);
 
 		return "panier";
 	}

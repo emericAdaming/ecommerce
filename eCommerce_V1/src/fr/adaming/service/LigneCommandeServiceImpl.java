@@ -12,42 +12,48 @@ import fr.adaming.modele.LigneCommande;
 public class LigneCommandeServiceImpl implements ILigneCommandeService{
 
 	@EJB
-	ILigneCommandeDao ligneServiceDao;
+	ILigneCommandeDao ligneCommandeDao;
 	
 	@Override
 	public LigneCommande ajouterLigneCommande(LigneCommande ligne) {
 		// TODO Auto-generated method stub
-		return ligneServiceDao.ajouterLigneCommande(ligne);
+		return ligneCommandeDao.ajouterLigneCommande(ligne);
 	}
 
 	@Override
 	public List<LigneCommande> getAllLignes() {
 		// TODO Auto-generated method stub
-		return ligneServiceDao.getAllLignes();
+		return ligneCommandeDao.getAllLignes();
 	}
 
 	@Override
 	public LigneCommande isExistLigneCommande(LigneCommande ligne) throws Exception {
 		// TODO Auto-generated method stub
-		return ligneServiceDao.isExistLigneCommande(ligne);
+		return ligneCommandeDao.isExistLigneCommande(ligne);
 	}
 
 	@Override
 	public LigneCommande updateLigneCommande(LigneCommande ligne) {
 		// TODO Auto-generated method stub
-		return ligneServiceDao.updateLigneCommande(ligne);
+		return ligneCommandeDao.updateLigneCommande(ligne);
 	}
 
 	@Override
 	public void supprimerLigneCommande(LigneCommande ligne) {
 		// TODO Auto-generated method stub
-		ligneServiceDao.supprimerLigneCommande(ligne);
+		ligneCommandeDao.supprimerLigneCommande(ligne);
 	}
 
 	@Override
 	public LigneCommande quantiteLigneCommande(LigneCommande ligne) {
 		// TODO Auto-generated method stub
-		return ligneServiceDao.quantiteLigneCommande(ligne);
+		return ligneCommandeDao.quantiteLigneCommande(ligne);
+	}
+
+	@Override
+	public int totalPanier(List<LigneCommande> listeLignes) {
+		// TODO Auto-generated method stub
+		return ligneCommandeDao.totalPanier(listeLignes);
 	}
 
 	
