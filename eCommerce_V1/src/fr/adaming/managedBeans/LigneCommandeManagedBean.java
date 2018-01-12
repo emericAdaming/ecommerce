@@ -29,6 +29,8 @@ public class LigneCommandeManagedBean implements Serializable {
 	private HttpSession maSession;
 
 	private int total;
+	
+	private int quantiteSelect;
 
 	// Constructeurs
 
@@ -51,6 +53,24 @@ public class LigneCommandeManagedBean implements Serializable {
 	public void setLigne(LigneCommande ligne) {
 		this.ligne = ligne;
 	}
+	
+	
+
+	public List<LigneCommande> getListeLignes() {
+		return listeLignes;
+	}
+
+	public void setListeLignes(List<LigneCommande> listeLignes) {
+		this.listeLignes = listeLignes;
+	}
+
+	public int getQuantiteSelect() {
+		return quantiteSelect;
+	}
+
+	public void setQuantiteSelect(int quantiteSelect) {
+		this.quantiteSelect = quantiteSelect;
+	}
 
 	public int getTotal() {
 		return total;
@@ -65,7 +85,8 @@ public class LigneCommandeManagedBean implements Serializable {
 	public String ajouterLigneCommande() {
 		System.out.println("Ajout vers le panier");
 		System.out.println("Ligne commande quantite:="+this.ligne.getQuantite());
-		System.out.println("Ligne commande quantite 2:="+this.ligne.getProduit().getQuantiteSelect());
+		//System.out.println("Ligne commande quantite 2:="+this.ligne.getProduit().getQuantiteSelect());
+		System.out.println("Ligne commande quantite 3:="+this.quantiteSelect);
 		if(this.ligne.getQuantite()==0)
 			this.ligne.setQuantite(22);
 		LigneCommande ligneExist;
