@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -32,6 +33,7 @@ import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import fr.adaming.modele.Client;
+import fr.adaming.modele.LigneCommande;
 import fr.adaming.service.IClientService;
 
 @ManagedBean(name="clientMB")
@@ -43,6 +45,8 @@ public class ClientManagedBean implements Serializable {
 	private IClientService clientService;
 	
 	private Client client;
+	
+	private List<LigneCommande> listeLignes;
 
 	// Constructeur
 	
@@ -56,6 +60,14 @@ public class ClientManagedBean implements Serializable {
 		return client;
 	}
 
+	public List<LigneCommande> getListeLignes() {
+		return listeLignes;
+	}
+
+	public void setListeLignes(List<LigneCommande> listeLignes) {
+		this.listeLignes = listeLignes;
+	}
+
 	public void setClient(Client client) {
 		this.client = client;
 	}
@@ -66,6 +78,8 @@ public class ClientManagedBean implements Serializable {
 		this.client=clientService.ajouterClient(this.client);
 		return "ajoutClient";
 	}
+	
+	
 	
 //**********************************************************************************************************	
 //****************************** Mail & Pdf ****************************************************************
@@ -86,6 +100,8 @@ public class ClientManagedBean implements Serializable {
 	}
 	
 	public String sendMail(){
+		
+		//Recup liste commande
 		
 		
 		try {

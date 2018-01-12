@@ -16,7 +16,10 @@
 	</ui:insert>
 
 	<h1>Panier</h1>
-
+	
+	<h:form>
+		<p:commandButton value="envoie mail" action="#{clientMB.sendMail}"></p:commandButton>
+	</h:form>
 
 	<p:dataTable var="ligne" value="#{sessionScope.listeLignes}">
 		<p:column headerText="ID">
