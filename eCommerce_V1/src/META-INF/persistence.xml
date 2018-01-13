@@ -11,6 +11,7 @@
 	<class>fr.adaming.modele.Commande</class>
 	<class>fr.adaming.modele.LigneCommande</class>
 	<class>fr.adaming.modele.Categorie</class>
+	<class>fr.adaming.modele.Admin</class>
 	
 	<!-- Assignation des valeurs aux properties de hibernate -->
 	<properties>

@@ -34,7 +34,7 @@
 	  	<f:setPropertyActionListener value="#{categorie}" target="#{produitMB.categorie}"></f:setPropertyActionListener>
 	  	<h:graphicImage  class="imageTaille" value="#{categorie.image}"/>
 	  	</p:commandLink>
-	  	<div class="ui-g-12 "><h:outputText style="color:black" value="#{categorie.description}"/></div>
+	  	<div class="ui-g-12 "><h:outputText style="color:black;font-size:12px;font-style:italic" value="#{categorie.description}"/></div>
 	  	<c:if test="${not empty sessionScope.adminSession}">
 	  	<div class="ui-g-6 "> <p:commandButton value="Supprimer" action="#{categorieMB.supprimerCategorie}" update="@all">
 	  	<f:setPropertyActionListener value="#{categorie}"
@@ -57,30 +57,6 @@
  </div>
 	
 </p:outputPanel>
-<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
-	
-<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
-	<h:form>
-		<p:dataTable var="cat" value="#{categorieMB.listeCategories}">
-			<p:column headerText="Categories">
-				<h:outputText value="#{cat.nomCategorie}" />
-			</p:column>
-			
-		<p:column headerText="Images">
-		 	<h:graphicImage  value="#{cat.image}"/>
-		</p:column>
-			
 
-			<p:column headerText="Boutton">
-				<p:commandButton value="#{cat.nomCategorie}"
-					action="#{produitMB.getProduitsCategorie}">
-					<f:setPropertyActionListener value="#{cat}"
-						target="#{produitMB.categorie}"></f:setPropertyActionListener>
-				</p:commandButton>
-
-			</p:column>
-		</p:dataTable>
-
-	</h:form>
 </h:body>
 </html>

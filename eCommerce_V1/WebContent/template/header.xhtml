@@ -17,20 +17,19 @@
 		<h:form>  
     <p:growl id="messages"/>
  
-    <p:menubar>
+    <p:menubar style="background:rgba(225,225,225,0.9)">
 
 
-         <p:menuitem icon="ui-icon-home" value="Accueil" url="accueil.xhtml"  />
+         <p:menuitem style="font-size:25px;font-weight:bold;margin-left:75px" icon="ui-icon-home" value="Accueil" url="accueil.xhtml"  />
   
  
-         <p:menuitem icon="ui-icon-suitcase" value="Panier" action="#{ligneCommandeMB.getAllLignes}" />
+         <p:menuitem style="font-size:25px;font-weight:bold;margin-left:75px" icon="ui-icon-suitcase" value="Panier" action="#{ligneCommandeMB.getAllLignes}" />
    		
-   		   
-   		 <p:menuitem icon="ui-icon-home" value="admin" url="login.xhtml"  />
-   		 
-		<f:facet name="options">
-            <p:inputText style="margin-right:10px" placeholder="Search"/>
-			 <p:commandButton value="admin" icon="ui-icon-plus" action="agentMB.goConnection"  />      
+   		  		   
+   		 <p:menuitem style="font-weight:bold;margin-left:600px" icon="ui-icon-home" value="admin" url="login.xhtml"  />
+   		<f:facet name="options">
+            <p:inputText style="margin-right:10px" placeholder="Search"/>   
+            <p:menuitem style="font-weight:bold;margin-left:700px" icon="ui-icon-home" value="admin" url="login.xhtml"  />  
         </f:facet>
  	  
     </p:menubar>

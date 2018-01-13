@@ -25,6 +25,7 @@ public class Produit {
 	private String designation;
 	private double prix;
 	private int quantite;
+	private int reduction;
 	private boolean selectionne;
 	@Transient
 	private int quantiteSelect;
@@ -48,7 +49,7 @@ public class Produit {
 
 
 	public Produit(Long idProduit, String description, String designation, double prix, int quantite,
-			boolean selectionne, byte[] photo,int quantiteSelect) {
+			boolean selectionne, byte[] photo,int quantiteSelect,int reduction) {
 		super();
 		this.idProduit = idProduit;
 		this.description = description;
@@ -58,11 +59,12 @@ public class Produit {
 		this.selectionne = selectionne;
 		this.photo = photo;
 		this.quantiteSelect=quantiteSelect;
+		this.reduction=reduction;
 	}
 
 
 	public Produit(String description, String designation, double prix, int quantite, boolean selectionne,
-			byte[] photo,Categorie categorie,int quantiteSelect) {
+			byte[] photo,Categorie categorie,int quantiteSelect,int reduction) {
 		super();
 		this.description = description;
 		this.designation = designation;
@@ -72,6 +74,7 @@ public class Produit {
 		this.photo = photo;
 		this.categorie = categorie;
 		this.quantiteSelect=quantiteSelect;
+		this.reduction=reduction;
 	}
 
 
@@ -166,6 +169,18 @@ public class Produit {
 
 	public void setQuantiteSelect(int quantiteSelect) {
 		this.quantiteSelect = quantiteSelect;
+	}
+	
+	
+
+
+	public int getReduction() {
+		return reduction;
+	}
+
+
+	public void setReduction(int reduction) {
+		this.reduction = reduction;
 	}
 
 

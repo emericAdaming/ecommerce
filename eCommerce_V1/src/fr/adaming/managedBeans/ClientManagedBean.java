@@ -1,6 +1,5 @@
 package fr.adaming.managedBeans;
 
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,10 +7,10 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Properties;
 
-import javax.activation.DataHandler;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -23,6 +22,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
+import javax.servlet.http.HttpSession;
 import javax.swing.ImageIcon;
 
 import com.itextpdf.text.Document;
@@ -40,18 +40,19 @@ import fr.adaming.service.IClientService;
 @RequestScoped
 public class ClientManagedBean implements Serializable {
 
-	
 	@EJB
 	private IClientService clientService;
 	
 	private Client client;
 	
 	private List<LigneCommande> listeLignes;
+	private HttpSession maSession;
 
 	// Constructeur
 	
 	public ClientManagedBean() {
 		this.client = new Client();
+		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	}
 	
 	// Getters & Setters
@@ -76,8 +77,7 @@ public class ClientManagedBean implements Serializable {
 	
 	public String ajouterClient(){
 		this.client=clientService.ajouterClient(this.client);
-	
-		return "commande";
+		return "ajoutClient";
 	}
 	
 	
@@ -100,14 +100,12 @@ public class ClientManagedBean implements Serializable {
 	    }
 	}
 	
-	public String sendMail(){
-		
-		//Recup liste commande
-		
-		
+	public void sendMail(){
+		//Recup infos clients
+		this.client=(Client) maSession.getAttribute("client");
 		try {
 		System.out.println("!!!!!!!!!!!!!Creation pdf!!!!!!!!!!!!!!!!!!!!");
-			creationPDF();
+		creationPDF();
 		System.out.println("!!!!!!!!!!!!!!!!!!! ENVOIE MAIL !!!!!!!!!!!!!!!!!!!!!!!!");
 		// Creation protocole
 	    Properties props = new Properties();
@@ -128,21 +126,17 @@ public class ClientManagedBean implements Serializable {
 			System.out.println("!!!!!!!! Message session cree !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			message.setFrom(new InternetAddress("ecommerce44000@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse("eme.guibert49@gmail.com"));
+					InternetAddress.parse(client.getEmail()));
 			System.out.println("!!!!!!!! Destinataire et envoteur done !!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			message.setSubject("Sujet du mail");
-			/*message.setText("Salut  !!!!!," +
-					"\n\n Regarde le pdf !!"+
-					"\n\n Cordialment! \n l'equipe ecommerce");
-			message.setText("Dear Mail Crawler,"
-					+ "\n\n No spam to my email, please!");*/
+			message.setSubject("Recapitulatif de votre commande");
+
 			System.out.println("!!!!!!!!!!!!!! Piece jointe !!!!!!!!!!!!!!!!!!!!!!!!!!");
 			MimeMultipart mp = new MimeMultipart();
 			MimeBodyPart mbp1 = new MimeBodyPart();
 			MimeBodyPart mbp2 = new MimeBodyPart();
 				mbp1.attachFile(new File("C:/Users/emegu/Documents/Test4.pdf"));
-				mbp2.setText("Salut  !!!!!," +
-					"\n\n Regarde le pdf !!"+
+				mbp2.setText("Bonjour "+client.getNomClient()+"  !!!!!," +
+					"\n\n Nous vous remercions de votre commande, veuillez trouvez en piece jointe le recapitulatif de vos achats !!"+
 					"\n\n Cordialment! \n l'equipe ecommerce");
 				/*ByteArrayDataSource ds = new ByteArrayDataSource(); 
 				mbp1.setDataHandler(new DataHandler(ds));
@@ -164,32 +158,40 @@ public class ClientManagedBean implements Serializable {
 			e.printStackTrace();
 		}
 		
-		return "accueil";
 	}
 	
 
 	
 	public void creationPDF() throws DocumentException, IOException {
-				String chemin= "C:/Users/emegu/Documents/Test4.pdf"; 
-			 // step 1
-		    	// Using a custom page size
-		        Rectangle pagesize = new Rectangle(216f, 720f);
-		        Document document = new Document();
-		        // step 2
-		        PdfWriter.getInstance(document, new FileOutputStream(chemin));
-		        // step 3
-		        document.open();
-		        Image icon = Image.getInstance("C:/Users/emegu/Pictures/chauve.jpg");
-		        icon.scaleAbsolute(100, 100);
-		        // icon.setAbsolutePosition(absoluteX, absoluteY);
-		        // step 4
-		       // document.addCreationDate();
-		        document.add(new Paragraph(
-		            "\t Hello People! \n" +
-		            "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv!"));
-		        document.add(icon);
-		        // step 5
-		        document.close();
+		String montantTotal=(String) maSession.getAttribute("montantTotal");
+		//Recup liste commande
+		listeLignes=(List<LigneCommande>) maSession.getAttribute("listeLignes");
+				
+		String chemin= "C:/Users/emegu/Documents/Test4.pdf"; 
+
+	     //Rectangle pagesize = new Rectangle(216f, 720f);
+		 Document document = new Document();
+
+		 PdfWriter.getInstance(document, new FileOutputStream(chemin));
+
+		 document.open();
+		 //Image icon = Image.getInstance("C:/Users/emegu/Pictures/chauve.jpg");
+		 document.add(new Paragraph(
+		            "\t \t \t Merci de votre commande \n" +
+		            "\n Voici le recapitulatif de vos achats:!"));
+		     int i=0;
+		     for(LigneCommande element:listeLignes){	
+		        	i++;
+		        	Image img = Image.getInstance(element.getProduit().getPhoto());
+		        	img.scaleAbsolute(150,150);
+					document.add(img);
+					String s="Article n°"+i+": "+element.getProduit().getDesignation()+"\t prix:"+element.getPrix();
+					document.add(new Paragraph(s));
+					
+		        }
+		  document.add(new Paragraph("\n Votre montant est de "+montantTotal+" €"));
+
+		  document.close();
 		
 		
 	}

@@ -106,7 +106,8 @@ public class LigneCommandeManagedBean implements Serializable {
 
 			// Metre à jour la liste dans la session
 			maSession.setAttribute("listeLignes", this.listeLignes);
-
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Produit deja existant dans panier ; rajout des nouveaux achats"));
+			
 			return "produits";
 
 		} catch (Exception e) {
@@ -125,8 +126,10 @@ public class LigneCommandeManagedBean implements Serializable {
 
 				// Metre à jour la liste dans la session
 				maSession.setAttribute("listeLignes", this.listeLignes);
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage( "Info", "Nouvelle commande ajoute"));
 			}catch(Exception e2){
 				System.out.println("%%%%%%%%%%%%%% Erreur dans ligne inexistante %%%%%%%%%%%%%%%");
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error !", "We don't know why ..."));				
 			}
 
 			return "produits";
@@ -148,7 +151,7 @@ public class LigneCommandeManagedBean implements Serializable {
 			
 			// Récupérer le montant total du panier
 			this.total = ligneCommandeService.totalPanier(this.listeLignes);
-
+			maSession.setAttribute("montantTotal", this.total); // Util pour l'envoie du mail
 			return "panier";
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La ligne n'a pas pu etre supprimée"));

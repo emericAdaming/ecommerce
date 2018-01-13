@@ -220,7 +220,7 @@ public class CategorieManagedBean implements Serializable {
 
 		// on garde seulement les categorie filtrees
 		for (Categorie element : listeCategories) {
-			if (element.getDescription().startsWith(recherche)) {
+			if (element.getNomCategorie().startsWith(recherche)) {
 				list_filtre.add(element);
 			}
 		}

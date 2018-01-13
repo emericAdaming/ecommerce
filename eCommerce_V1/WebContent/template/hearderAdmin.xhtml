@@ -26,23 +26,17 @@
         <p:submenu label="Categorie" >
             <p:submenu label="Ajouter" >
                 <p:menuitem value="NEW categorie" url="ajoutCategorie.xhtml" />
-                <p:menuitem value="......" url="#" />
             </p:submenu>
-            <p:menuitem value="Supprimer" url="supprimerCategorie.xhtml" />
-            <p:menuitem value="Modifier" url="modifierCategorie.xhtml" />
             <p:separator />
             <p:menuitem value="Rechercher" url="rechercherCategorie.xhtml" />
         </p:submenu>
  
         <p:submenu label="Produits" >
-            <p:menuitem value="Lister Produits" action="#"  />
              <p:menuitem value="Ajouter" url="ajoutProduit.xhtml" />
-            <p:menuitem value="Modifier" url="#" />
-            <p:menuitem value="Supprimer"  url="supprimerProduit.xhtml" />
             <p:menuitem value="Recherche" url="rechercherProduit.xhtml" />
         </p:submenu>
  
-
+	
          <p:menuitem icon="ui-icon-suitcase" value="Panier" action="#{ligneCommandeMB.getAllLignes}" />
    
  		<p:menuitem icon="ui-icon-extlink" value="logout admin" action="#{adminMB.seDeconnecter}"  />

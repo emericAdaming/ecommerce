@@ -15,11 +15,9 @@
 	<ui:insert name="pageHeader" >	  				
 		<c:choose>      
          <c:when test = "${not empty sessionScope.adminSession}">
-            Admin
 			<ui:include src="/template/hearderAdmin.xhtml"></ui:include>
          </c:when>                
          <c:otherwise>
-            Base
            <ui:include src="/template/header.xhtml"></ui:include>
          </c:otherwise>
       </c:choose>

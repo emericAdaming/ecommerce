@@ -31,12 +31,23 @@
 	   	<div class="ui-g-3 " >
 	 	 	<h:graphicImage  class="imageTaille" value="#{pro.image}"/>
 		</div>
-	  	<div class="ui-g-7"><h:outputText style="color:black" value="#{pro.description}"/></div>
+	  	<div class="ui-g-7">
+	  		<div class="ui-g-12"><h:outputText style="color:black" value="#{pro.designation}"/></div>
+	  		<div class="ui-g-12"><h:outputText style="color:black" value="#{pro.description}"/></div>
+	  	</div>
 	    <div class="ui-g-2" style="background-color:rgba(130,230,130,0.6)" >
 				<div class="ui-g-12"/>
-				prix:
+				<h:outputText style="color:black" value="Prix:"/>
+				<c:choose>
+					<c:when test="#{pro.reduction >0}">
+					<h:outputText style="color:black;font-style:italic;text-decoration:line-through;font-size:15px" value=" #{pro.prix} €"/>
+					<h:outputText style="color:red;font-style:italic" value=" #{pro.prix * (1-pro.reduction / 100)} €"/>
+					</c:when>
+					<c:otherwise><h:outputText style="color:black;font-style:italic" value=" #{pro.prix} €"/></c:otherwise>
+				</c:choose>
 				<div class="ui-g-12"/>
 				<h:form>
+				 <p:growl id="growl" showDetail="true"  /> 
 				<div class="ui-g-6">
 				
 				<h:inputText style="width:50px" value="#{pro.quantiteSelect}" placeholder="Qté" />
@@ -44,7 +55,7 @@
 				<div class="ui-g-6">
 				
 				<p:commandButton value="+"
-					action="#{ligneCommandeMB.ajouterLigneCommande}" update="@all">
+					action="#{ligneCommandeMB.ajouterLigneCommande}" update="growl">
 					<f:setPropertyActionListener value="#{pro}"
 						target="#{ligneCommandeMB.ligne.produit}"></f:setPropertyActionListener>
 					<f:setPropertyActionListener value="#{pro.quantiteSelect}"
@@ -53,9 +64,21 @@
 				
 				</div>
 				</h:form>
-				<div class="ui-g-12"><h:outputText style="color:black" value="Quantite:"/></div>
-						
-				<div class="ui-g-12"><h:outputText style="color:black" value="Reduction:"/></div>
+				<div class="ui-g-12"><h:outputText style="color:black;font-size:16px" value="Quantite en stock: "/>
+									<h:outputText style="color:black;font-style:italic" value="#{pro.quantite}"/>
+				</div>
+				
+				<div class="ui-g-12">
+				<c:choose>
+					<c:when test="#{pro.reduction >0}">
+									<h:outputText style="color:red" value="Reduction:"/>
+									<h:outputText style="color:red;font-style:italic" value="#{pro.reduction}%"/>
+					</c:when>
+					<c:otherwise><h:outputText  value=" "/></c:otherwise>
+				</c:choose>	
+									
+				</div>
+
 				
 		</div>
 	  	

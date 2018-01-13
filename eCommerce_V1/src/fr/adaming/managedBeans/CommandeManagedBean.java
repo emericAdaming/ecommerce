@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -95,8 +96,14 @@ public class CommandeManagedBean {
 			ligneCommande.setCommande(this.commande);
 			ligneCommandeService.updateLigneCommande(ligneCommande);
 		}
-
+		//Envoie des informations dans session pour que envoieMail de clientMB possede toutes les infos necessaires (montant,email ...)
+		maSession.setAttribute("client", this.client);
+		
 		return "commande";
 	}
+	
+	
+	
+
 
 }

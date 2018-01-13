@@ -6,17 +6,24 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 	
-<head>
+<h:head>
 <title>Commande</title>
-</head>
-<body>
+</h:head>
+<h:body >
 
 <h1>Recapitulatif de la commande</h1>
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{clientMB.sendMail}" />
+</f:metadata>
+	
 
 ID <h:outputText value="#{commandeMB.commande.idCommande}"/>
 Client <h:outputText value="#{commandeMB.commande.client}"/>
 Date <h:outputText value="#{commandeMB.commande.dateCommande}"/>
 
+
+	
 	<p:dataTable var="ligne" value="#{sessionScope.listeLignes}">
 		<p:column headerText="ID">
 			<h:outputText value="#{ligne.id}" />
@@ -31,7 +38,7 @@ Date <h:outputText value="#{commandeMB.commande.dateCommande}"/>
 		</p:column>
 
 		<p:column headerText="Produit">
-			<h:outputText value="#{ligne.produit}" />
+			<h:outputText value="#{ligne.produit.designation}" />
 		</p:column>
 
 		<p:column headerText="Supprimer">
@@ -57,6 +64,8 @@ Date <h:outputText value="#{commandeMB.commande.dateCommande}"/>
 		</p:column>
 
 	</p:dataTable>
+	
+	<h1 style="color:blue">Un mail vous a ete envoye !</h1>
 
-</body>
+</h:body>
 </html>

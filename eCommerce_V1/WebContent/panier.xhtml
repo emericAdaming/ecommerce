@@ -15,7 +15,7 @@
 		<ui:include src="/template/layout.xhtml"></ui:include>
 	</ui:insert>
 
-	<h1>Panier</h1>
+	<h1 style="text-align:center">Panier</h1>
 
 	<h:form>
 		<p:commandButton value="envoie mail" action="#{clientMB.sendMail}"></p:commandButton>
@@ -35,7 +35,7 @@
 		</p:column>
 
 		<p:column headerText="Produit">
-			<h:outputText value="#{ligne.produit}" />
+			<h:outputText value="#{ligne.produit.designation}" />
 		</p:column>
 
 		<p:column headerText="Supprimer">
