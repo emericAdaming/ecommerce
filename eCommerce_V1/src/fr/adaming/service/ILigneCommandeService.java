@@ -25,4 +25,6 @@ public interface ILigneCommandeService {
 	
 	public LigneCommande updateLigneCommande(LigneCommande ligne);
 	
+	public LigneCommande getLigneByIdProduit(long idProduit) throws Exception;
+	
 }

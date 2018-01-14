@@ -172,4 +172,21 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		return ligneOut;
 	}
 
+	@Override
+	public LigneCommande getLigneByIdProduit(long idProduit) throws Exception {
+		// Requete
+		String req="SELECT l FROM LigneCommande l WHERE l.produit.idProduit=:pIdProduit";
+		
+		// Query
+		Query query=em.createQuery(req);
+		
+		// Params
+		query.setParameter("pIdProduit", idProduit);
+
+		// Récupérer le resultat
+		LigneCommande ligneOut=(LigneCommande) query.getSingleResult();
+		
+		return ligneOut;
+	}
+
 }

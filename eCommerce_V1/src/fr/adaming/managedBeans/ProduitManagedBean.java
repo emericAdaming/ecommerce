@@ -19,8 +19,10 @@ import org.primefaces.model.UploadedFile;
 import javax.faces.context.FacesContext;
 
 import fr.adaming.modele.Categorie;
+import fr.adaming.modele.LigneCommande;
 import fr.adaming.modele.Produit;
 import fr.adaming.service.ICategorieService;
+import fr.adaming.service.ILigneCommandeService;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "produitMB")
@@ -33,6 +35,9 @@ public class ProduitManagedBean implements Serializable {
 	@EJB
 	private ICategorieService categorieService;
 
+	@EJB
+	private ILigneCommandeService ligneCommandeService;
+
 	private Produit produit;
 
 	private List<Produit> listeProduits;
@@ -40,6 +45,8 @@ public class ProduitManagedBean implements Serializable {
 	private Categorie categorie;
 
 	private String image;
+
+	private LigneCommande ligne;
 
 	private HttpSession maSession;
 
@@ -98,6 +105,14 @@ public class ProduitManagedBean implements Serializable {
 		this.image = image;
 	}
 
+	public LigneCommande getLigne() {
+		return ligne;
+	}
+
+	public void setLigne(LigneCommande ligne) {
+		this.ligne = ligne;
+	}
+
 	// Méthodes métier
 
 	public String getProduitsCategorie() {
@@ -105,23 +120,21 @@ public class ProduitManagedBean implements Serializable {
 		System.out.println("Categorie du produit: " + this.categorie);
 		System.out.println(" %%%%%%%%%%%%%%% Categorie du produit: " + this.categorie.getIdCategorie()
 				+ "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		List<Produit>   listOut = produitService.getProduitsCategorie(this.categorie);
-		this.listeProduits=new ArrayList<Produit>();
-		
+		List<Produit> listOut = produitService.getProduitsCategorie(this.categorie);
+		this.listeProduits = new ArrayList<Produit>();
+
 		// On ajoute la liste de produits dans la session
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeProduits", listeProduits);
-		
-		for(Produit element:listOut){
-			if(element.getPhoto() == null){
+
+		for (Produit element : listOut) {
+			if (element.getPhoto() == null) {
 				element.setImage(null);
-			}else{
-				element.setImage("data:image/png;base64,"+Base64.encodeBase64String(element.getPhoto()));
+			} else {
+				element.setImage("data:image/png;base64," + Base64.encodeBase64String(element.getPhoto()));
 			}
 			this.listeProduits.add(element);
 		}
-		
-		
-		
+
 		return "produits";
 
 	}
@@ -168,33 +181,63 @@ public class ProduitManagedBean implements Serializable {
 
 	public String supprimerProduit() {
 
-		System.out.println("***************SUPPRIMER PRODUIT****************");
-		System.out.println(this.produit);
-		
-		// Supprimer le produit
-		produitService.deleteProduit(this.produit);
+		// Récupérer la ligne de commande a supprimer
+		try {
+			System.out.println("***************SUPPRIMER PRODUIT****************");
+			System.out.println(this.produit);
+			System.out.println("************ID PRODUIT********" + produit.getIdProduit());
+			this.ligne = ligneCommandeService.getLigneByIdProduit(produit.getIdProduit());
+			System.out.println("********LIGNE A SUPPRIMER*******" + this.ligne);
 
-		System.out.println(this.categorie);
-		
-		// Récupérer la nouvelle liste à partir de la BDD
-		this.listeProduits = produitService.getProduitsCategorie(this.categorie);
+			// Supprimer la ligne de commande
+			ligneCommandeService.supprimerLigneCommande(ligne);
 
-		// Metre à jour la liste dans la session
-		maSession.setAttribute("listeProduits", this.listeProduits);
+			System.out.println("PRODUIT EXISTANT DANS LIGNECOMMANDE");
+			
+			// Supprimer le produit
+			produitService.deleteProduit(this.produit);
 
-		produit = new Produit();
-		image = "";
-		return "accueil";
+			System.out.println(this.categorie);
+
+			// Récupérer la nouvelle liste à partir de la BDD
+			this.listeProduits = produitService.getProduitsCategorie(this.categorie);
+
+			// Metre à jour la liste dans la session
+			maSession.setAttribute("listeProduits", this.listeProduits);
+
+			produit = new Produit();
+			image = "";
+			return "produits";
+		} catch (Exception e) {
+			System.out.println("PRODUIT INEXISTANT DANS LIGNECOMMANDE");
+			
+			// Supprimer le produit
+			produitService.deleteProduit(this.produit);
+
+			System.out.println(this.categorie);
+
+			// Récupérer la nouvelle liste à partir de la BDD
+			this.listeProduits = produitService.getProduitsCategorie(this.categorie);
+
+			// Metre à jour la liste dans la session
+			maSession.setAttribute("listeProduits", this.listeProduits);
+
+			produit = new Produit();
+			image = "";
+			return "produits";
+		}
 
 	}
 
 	public String updateProduit() {
 
 		System.out.println("***************UPDATE******************");
-		
+
+		System.out.println("**************PRODUIT A MODIFIER**********" + this.produit);
+
 		// Récupérer la categorie a partir du nom
 
-		System.out.println("***************CATEGORIE BY NOM******************"+this.categorie);
+		System.out.println("***************CATEGORIE BY NOM******************" + this.categorie);
 		Categorie categorieByName = categorieService.getCategorieByName(this.categorie);
 
 		// Attribuer la catégorie au produit à ajouter
@@ -211,6 +254,6 @@ public class ProduitManagedBean implements Serializable {
 
 		produit = new Produit();
 		image = "";
-		return "accueil";
+		return "produits";
 	}
 }

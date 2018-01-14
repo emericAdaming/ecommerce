@@ -62,6 +62,12 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService{
 		return ligneCommandeDao.updateLigneCommande(ligne);
 	}
 
+	@Override
+	public LigneCommande getLigneByIdProduit(long idProduit) throws Exception {
+		// TODO Auto-generated method stub
+		return ligneCommandeDao.getLigneByIdProduit(idProduit);
+	}
+
 	
 	
 }
