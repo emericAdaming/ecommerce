@@ -25,13 +25,17 @@
 		<p:column headerText="ID">
 			<h:outputText value="#{ligne.id}" />
 		</p:column>
-
+		
 		<p:column headerText="Prix">
-			<h:outputText value="#{ligne.prix}" />
+			<h:outputText value="#{ligne.produit.prix}" />
 		</p:column>
 
 		<p:column headerText="Quantité">
 			<h:outputText value="#{ligne.quantite}" />
+		</p:column>
+
+		<p:column headerText="Total">
+			<h:outputText value="#{ligne.prix}" />
 		</p:column>
 
 		<p:column headerText="Produit">

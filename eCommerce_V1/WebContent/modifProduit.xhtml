@@ -28,7 +28,6 @@
 	Quantité:<h:inputText value="#{produitMB.produit.quantite}"/>
 	 <p:outputLabel for="ca" value="Categorie " />
         <p:selectOneMenu id="ca" value="#{categorieMB.categorie.nomCategorie}">
-            <f:selectItem itemLabel="Select One" itemValue="" />
             <f:selectItems value="#{categorieMB.categorie_designation}" />
         </p:selectOneMenu>
       

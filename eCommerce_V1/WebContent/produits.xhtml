@@ -107,7 +107,8 @@
 							<div class="ui-g-12  ">
 								<h:form>
 									<div class="ui-g-2 ">
-										<p:commandButton value="Supprimer" action="#{produitMB.supprimerProduit}" update="@all">
+										<p:commandButton value="Supprimer"
+											action="#{produitMB.supprimerProduit}" update="@all">
 											<f:setPropertyActionListener value="#{pro}"
 												target="#{produitMB.produit}"></f:setPropertyActionListener>
 										</p:commandButton>
@@ -115,9 +116,12 @@
 								</h:form>
 								<h:form>
 									<div class="ui-g-2 ">
-										<p:commandButton value="Modifier" action="modifProduit" update="@all">
+										<p:commandButton value="Modifier" action="modifProduit"
+											update="@all">
 											<f:setPropertyActionListener value="#{pro}"
 												target="#{produitMB.produit}"></f:setPropertyActionListener>
+											<f:setPropertyActionListener value="#{pro.categorie}"
+												target="#{categorieMB.categorie}"></f:setPropertyActionListener>
 										</p:commandButton>
 									</div>
 								</h:form>
